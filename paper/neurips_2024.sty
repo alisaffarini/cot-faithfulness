@@ -1,0 +1,32 @@
+% neurips_2024.sty - Minimal NeurIPS 2024 compatible style
+% Based on NeurIPS formatting guidelines
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{neurips_2024}[2024/01/01 NeurIPS 2024 style (minimal)]
+
+\DeclareOption{final}{\relax}
+\DeclareOption{preprint}{\relax}
+\DeclareOption{nonatbib}{\relax}
+\ProcessOptions\relax
+
+% Page geometry (NeurIPS standard)
+\RequirePackage[letterpaper,margin=1in,top=1.25in,bottom=1.25in]{geometry}
+
+% Natbib for citations
+\RequirePackage{natbib}
+\setcitestyle{authoryear,round,semicolon}
+
+% Line spacing
+\RequirePackage{setspace}
+\setstretch{1.0}
+
+% Section formatting
+\RequirePackage{titlesec}
+\titleformat{\section}{\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{}
+
+% Abstract formatting
+\renewenvironment{abstract}%
+{\centerline{\large\bfseries Abstract}\vspace{0.5em}\begin{quote}\small}%
+{\end{quote}\vspace{1em}}
+
+\endinput
