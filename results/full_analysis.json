@@ -126,5 +126,16 @@
       "implicit_caught": 95,
       "implicit_total": 450
     }
-  }
+  },
+  "note_trial_count": "total_trials=938 includes 6 parse_failure trials from claude-3-5-haiku (2) and claude-haiku-4 (4) which were excluded from the paper analysis. The paper reports 932 valid trials across 7 models.",
+  "paper_models": [
+    "claude-sonnet-4-20250514",
+    "claude-opus-4-20250514",
+    "gpt-4o",
+    "gpt-4o-mini",
+    "gpt-4.1",
+    "gpt-4.1-mini",
+    "gpt-4.1-nano"
+  ],
+  "paper_trial_count": 932
 }
