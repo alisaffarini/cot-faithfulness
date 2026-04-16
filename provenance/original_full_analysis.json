@@ -1,0 +1,130 @@
+{
+  "timestamp": "2026-03-19T21:25:48.762643",
+  "total_trials": 938,
+  "model_stats": {
+    "claude-3-5-haiku-20241022": {
+      "n": 2,
+      "cats": {
+        "parse_failure": 2
+      },
+      "implicit_caught": 2,
+      "implicit_total": 2
+    },
+    "claude-haiku-4-20250414": {
+      "n": 4,
+      "cats": {
+        "parse_failure": 4
+      },
+      "implicit_caught": 4,
+      "implicit_total": 4
+    },
+    "claude-opus-4-20250514": {
+      "n": 120,
+      "cats": {
+        "decorative": 23,
+        "faithful": 60,
+        "confused": 21,
+        "unclear": 15,
+        "mixed": 1
+      },
+      "implicit_caught": 80,
+      "implicit_total": 120
+    },
+    "claude-sonnet-4-20250514": {
+      "n": 122,
+      "cats": {
+        "faithful": 61,
+        "confused": 24,
+        "decorative": 26,
+        "unclear": 10,
+        "mixed": 1
+      },
+      "implicit_caught": 86,
+      "implicit_total": 122
+    },
+    "gpt-4.1": {
+      "n": 150,
+      "cats": {
+        "faithful": 66,
+        "unclear": 19,
+        "decorative": 43,
+        "confused": 19,
+        "mixed": 3
+      },
+      "implicit_caught": 38,
+      "implicit_total": 150
+    },
+    "gpt-4.1-mini": {
+      "n": 150,
+      "cats": {
+        "decorative": 26,
+        "faithful": 59,
+        "mixed": 19,
+        "confused": 21,
+        "unclear": 22,
+        "parse_failure": 3
+      },
+      "implicit_caught": 32,
+      "implicit_total": 150
+    },
+    "gpt-4.1-nano": {
+      "n": 150,
+      "cats": {
+        "mixed": 9,
+        "decorative": 62,
+        "faithful": 42,
+        "unclear": 26,
+        "confused": 11
+      },
+      "implicit_caught": 25,
+      "implicit_total": 150
+    },
+    "gpt-4o": {
+      "n": 120,
+      "cats": {
+        "decorative": 21,
+        "faithful": 61,
+        "confused": 19,
+        "mixed": 4,
+        "unclear": 15
+      },
+      "implicit_caught": 32,
+      "implicit_total": 120
+    },
+    "gpt-4o-mini": {
+      "n": 120,
+      "cats": {
+        "decorative": 26,
+        "faithful": 46,
+        "unclear": 20,
+        "mixed": 9,
+        "confused": 19
+      },
+      "implicit_caught": 43,
+      "implicit_total": 120
+    }
+  },
+  "provider_stats": {
+    "Anthropic": {
+      "n": 242,
+      "faithful": 121,
+      "decorative": 49,
+      "implicit_caught": 166,
+      "implicit_total": 242
+    },
+    "OpenAI (4o)": {
+      "n": 240,
+      "faithful": 107,
+      "decorative": 47,
+      "implicit_caught": 75,
+      "implicit_total": 240
+    },
+    "OpenAI (4.1)": {
+      "n": 450,
+      "faithful": 167,
+      "decorative": 131,
+      "implicit_caught": 95,
+      "implicit_total": 450
+    }
+  }
+}
