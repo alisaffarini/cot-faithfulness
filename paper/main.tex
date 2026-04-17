@@ -1,14 +1,11 @@
 \documentclass{article}
 
-% NeurIPS 2026 style
-\usepackage[final]{neurips_2024} % use neurips_2024.sty or similar
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
+% ICLR 2025 style
+\usepackage{iclr2025_conference,times}
 \usepackage{hyperref}
 \usepackage{url}
+\usepackage{amsmath,amssymb}
 \usepackage{booktabs}
-\usepackage{amsmath}
-\usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage{microtype}
 \usepackage{xcolor}
@@ -21,7 +18,7 @@ Evidence from Corruption Probes Across Five Language Models}
 \author{
   Ali Saffarini \\
   Harvard University \\
-  \texttt{asaffarini@college.harvard.edu}
+  \texttt{alisaffarini8@gmail.com}
 }
 
 \begin{document}
@@ -31,6 +28,7 @@ Evidence from Corruption Probes Across Five Language Models}
 % ============================================================
 \begin{abstract}
 % ============================================================
+\footnote{Code and data: \url{https://github.com/alisaffarini/cot-faithfulness}}
 Chain-of-thought (CoT) prompting is widely assumed to expose the reasoning process underlying a model's answer. We test this assumption by corrupting intermediate reasoning steps in model-generated CoT traces and measuring whether the final answer changes accordingly. Across 600 trials spanning five models (Claude Sonnet 4, Claude Opus 4, GPT-4.1, GPT-4.1-mini, GPT-4.1-nano), three reasoning domains, and four corruption types, we find that (1)~models follow corrupted reasoning only 35--59\% of the time, suggesting that CoT is frequently decorative rather than functional; (2)~using a unified structured error-detection prompt, OpenAI models detect implicitly embedded errors at 97--100\% compared to 2.5--5.8\% for Anthropic models ($p < 10^{-142}$, Fisher's exact test), revealing a striking provider-level divergence in how models evaluate presented reasoning; and (3)~faithfulness scales with model capability, with GPT-4.1-nano exhibiting the highest decorative-CoT rate (27.5\%). We introduce a taxonomy of CoT utilization---\emph{faithful}, \emph{decorative}, \emph{confused}, and \emph{mixed}---and demonstrate that faithfulness and implicit error detection are dissociable capabilities, producing a ``paradox of unfaithfulness'' in which a model can follow corrupted reasoning yet respond very differently when asked to verify that same reasoning.
 \end{abstract}
 
