@@ -16,7 +16,7 @@
 \usepackage{caption}
 
 \title{Is Chain-of-Thought Reasoning Faithful? \\
-Evidence from Corruption Probes Across Seven Language Models}
+Evidence from Corruption Probes Across Five Language Models}
 
 \author{
   Ali Saffarini \\
@@ -31,7 +31,7 @@ Evidence from Corruption Probes Across Seven Language Models}
 % ============================================================
 \begin{abstract}
 % ============================================================
-Chain-of-thought (CoT) prompting is widely assumed to expose the reasoning process underlying a model's answer. We test this assumption by corrupting intermediate reasoning steps in model-generated CoT traces and measuring whether the final answer changes accordingly. Across 932 trials spanning seven models (Claude Sonnet 4, Claude Opus 4, GPT-4o, GPT-4o-mini, GPT-4.1, GPT-4.1-mini, GPT-4.1-nano), three reasoning domains, and four corruption types, we find that (1)~models follow corrupted reasoning only 37--50\% of the time, suggesting that CoT is frequently decorative rather than functional; (2)~Anthropic models detect implicitly embedded errors at roughly 2--3$\times$ the rate of OpenAI models ($p < 10^{-15}$, Fisher's exact test); and (3)~faithfulness and error detection scale monotonically with model capability, with GPT-4.1-nano exhibiting the highest decorative-CoT rate (41.3\%). We introduce a taxonomy of CoT utilization---\emph{faithful}, \emph{decorative}, \emph{confused}, and \emph{mixed}---and demonstrate that faithfulness and implicit error detection are dissociable capabilities, producing a ``paradox of unfaithfulness'' in which a model can follow corrupted reasoning yet still identify the corruption when prompted to verify.
+Chain-of-thought (CoT) prompting is widely assumed to expose the reasoning process underlying a model's answer. We test this assumption by corrupting intermediate reasoning steps in model-generated CoT traces and measuring whether the final answer changes accordingly. Across 600 trials spanning five models (Claude Sonnet 4, Claude Opus 4, GPT-4.1, GPT-4.1-mini, GPT-4.1-nano), three reasoning domains, and four corruption types, we find that (1)~models follow corrupted reasoning only 35--59\% of the time, suggesting that CoT is frequently decorative rather than functional; (2)~using a unified structured error-detection prompt, OpenAI models detect implicitly embedded errors at 97--100\% compared to 2.5--5.8\% for Anthropic models ($p < 10^{-142}$, Fisher's exact test), revealing a striking provider-level divergence in how models evaluate presented reasoning; and (3)~faithfulness scales with model capability, with GPT-4.1-nano exhibiting the highest decorative-CoT rate (27.5\%). We introduce a taxonomy of CoT utilization---\emph{faithful}, \emph{decorative}, \emph{confused}, and \emph{mixed}---and demonstrate that faithfulness and implicit error detection are dissociable capabilities, producing a ``paradox of unfaithfulness'' in which a model can follow corrupted reasoning yet respond very differently when asked to verify that same reasoning.
 \end{abstract}
 
 % ============================================================
@@ -48,8 +48,8 @@ We propose a direct test of CoT faithfulness: \textbf{corruption probing}. Given
 Our contributions are:
 \begin{enumerate}
     \item A corruption-probe methodology for measuring CoT faithfulness across four corruption types (arithmetic errors, logic flips, fact swaps, and step deletions) and three reasoning domains (mathematics, formal logic, and commonsense reasoning).
-    \item A large-scale empirical study (932 trials) across seven frontier models from two providers, revealing that CoT is faithful only 37--50\% of the time depending on provider and model scale.
-    \item The discovery of a substantial \textbf{provider gap in implicit error detection}: Anthropic models catch embedded errors at 68.6\% compared to 21.1--31.2\% for OpenAI models, a difference significant at $p < 10^{-15}$.
+    \item A large-scale empirical study (600 trials) across five frontier models from two providers, revealing that CoT is faithful only 35--59\% of the time depending on provider and model scale.
+    \item The discovery of a striking \textbf{provider divergence in implicit error detection}: using a unified structured prompt, OpenAI models report detecting embedded errors at 97--100\% while Anthropic models report detection at only 2.5--5.8\%, a difference significant at $p < 10^{-142}$.
     \item A taxonomy of CoT utilization behaviors and evidence that faithfulness and error detection are dissociable capabilities.
 \end{enumerate}
 
@@ -64,7 +64,7 @@ Our contributions are:
 
 \paragraph{Measuring CoT influence.} \citet{lanham2023measuring} proposed several metrics for assessing whether CoT reasoning is utilized, including early answering (truncating the CoT and checking if the answer changes) and paraphrasing (rewriting CoT steps to test sensitivity). They found that for many tasks, models can produce correct answers even when CoT is truncated early, suggesting limited causal influence of later reasoning steps.
 
-\paragraph{Distinction from prior work.} Our corruption-probe methodology differs from \citet{turpin2023language} in that we directly manipulate the \emph{content} of reasoning steps rather than upstream biasing features, and from \citet{lanham2023measuring} in that we introduce \emph{targeted errors} rather than truncations or paraphrases. This allows us to measure not just whether the CoT matters, but whether specific reasoning steps are tracked and utilized. Additionally, our cross-provider, cross-model comparison at scale (seven models, 932 trials) provides the first systematic evidence of provider-level differences in CoT utilization.
+\paragraph{Distinction from prior work.} Our corruption-probe methodology differs from \citet{turpin2023language} in that we directly manipulate the \emph{content} of reasoning steps rather than upstream biasing features, and from \citet{lanham2023measuring} in that we introduce \emph{targeted errors} rather than truncations or paraphrases. This allows us to measure not just whether the CoT matters, but whether specific reasoning steps are tracked and utilized. Additionally, our cross-provider, cross-model comparison at scale (five models, 600 trials) provides the first systematic evidence of provider-level differences in CoT utilization.
 
 % ============================================================
 \section{Methodology}
@@ -78,7 +78,7 @@ Our experimental protocol has three phases per trial:
 \begin{enumerate}
     \item \textbf{Phase 1: Natural CoT elicitation.} We prompt the model to solve a problem step by step, producing a natural CoT trace $C$ and final answer $a$.
     \item \textbf{Phase 2: Corruption probe.} We present the model with its own CoT trace $C$ alongside a specific corruption instruction---e.g., ``In step 2, change the multiplication result from \$22 to \$15.'' The model is asked to (a) follow the corrupted reasoning to its logical conclusion, and (b) separately solve the problem from scratch. This yields a \emph{following answer} $a_f$ and an \emph{own answer} $a_o$.
-    \item \textbf{Phase 3: Implicit error detection.} We present the corrupted reasoning as if it were the model's own incomplete work (``Here's my work so far, please continue...''), without flagging the error. We measure whether the model detects and corrects the error organically.
+    \item \textbf{Phase 3: Implicit error detection.} We present the corrupted reasoning alongside a note hinting at the corruption location, then ask the model to judge whether an error is present using a structured response format: \texttt{ERROR FOUND: YES} or \texttt{ERROR FOUND: NO}, followed by a description and corrected answer. This unified structured prompt is identical across all models and providers, ensuring cross-provider comparability. A trial is scored as ``caught'' if the model responds \texttt{ERROR FOUND: YES}.
 \end{enumerate}
 
 \subsection{Problem Set}
@@ -120,13 +120,13 @@ Trials where answers could not be parsed or matched neither the correct nor expe
 
 \subsection{Models}
 
-We evaluated seven models from two providers:
+We evaluated five models from two providers:
 \begin{itemize}
     \item \textbf{Anthropic}: Claude Sonnet 4 (\texttt{claude-sonnet-4-20250514}), Claude Opus 4 (\texttt{claude-opus-4-20250514})
-    \item \textbf{OpenAI}: GPT-4o, GPT-4o-mini, GPT-4.1, GPT-4.1-mini, GPT-4.1-nano
+    \item \textbf{OpenAI}: GPT-4.1, GPT-4.1-mini, GPT-4.1-nano
 \end{itemize}
 
-All models were queried at temperature 0.0 via their respective APIs. Trial counts per model range from 120 to 150, totaling 932 valid trials.
+All models were queried at temperature 0.0 via their respective APIs, with 120 trials per model (600 total). All five models were run using the same unified Phase 3 structured prompt, ensuring that implicit error detection results are directly comparable across providers.
 
 \subsection{Statistical Methods}
 
@@ -139,11 +139,11 @@ We use Fisher's exact test for pairwise comparisons of proportions (faithfulness
 
 \subsection{Overall Faithfulness}
 
-Table~\ref{tab:model_results} presents the full model-level results. Across all 932 trials, the mean faithfulness rate is 42.5\%, indicating that models follow corrupted reasoning to its logical (wrong) conclusion less than half the time. The decorative rate---trials where the model ignores the corruption entirely---averages 24.4\%.
+Table~\ref{tab:model_results} presents the full model-level results. Across all 600 trials, the mean faithfulness rate is 50.7\%, indicating that models follow corrupted reasoning to its logical (wrong) conclusion roughly half the time. The decorative rate---trials where the model ignores the corruption entirely---averages 20.3\%.
 
 \begin{table}[t]
 \centering
-\caption{Model-level results across all 932 trials. \textbf{Faith.}\ = faithful (follows corruption, solves correctly independently). \textbf{Decor.}\ = decorative (ignores corruption). \textbf{Conf.}\ = confused (follows corruption, fails independently). \textbf{Impl.}\ = implicit error detection rate.}
+\caption{Model-level results across all 600 trials. \textbf{Faith.}\ = faithful (follows corruption, solves correctly independently). \textbf{Decor.}\ = decorative (ignores corruption). \textbf{Conf.}\ = confused (follows corruption, fails independently). \textbf{Impl.}\ = implicit error detection rate (unified structured prompt).}
 \label{tab:model_results}
 \vspace{0.5em}
 \begin{tabular}{@{}llccccccc@{}}
@@ -151,55 +151,52 @@ Table~\ref{tab:model_results} presents the full model-level results. Across all 
 Provider & Model & $n$ & Faith.\% & Decor.\% & Conf.\% & Mixed\% & Unclear\% & Impl.\% \\
 \midrule
 \multirow{2}{*}{Anthropic}
- & Claude Sonnet 4 & 122 & 50.0 & 21.3 & 19.7 & 0.8 & 8.2 & 70.5 \\
- & Claude Opus 4   & 120 & 50.0 & 19.2 & 17.5 & 0.8 & 12.5 & 66.7 \\
-\midrule
-\multirow{2}{*}{OpenAI (4o)}
- & GPT-4o      & 120 & 50.8 & 17.5 & 15.8 & 3.3 & 12.5 & 26.7 \\
- & GPT-4o-mini & 120 & 38.3 & 21.7 & 15.8 & 7.5 & 16.7 & 35.8 \\
+ & Claude Sonnet 4 & 120 & 59.2 & 23.3 & 10.0 & 0.0 & 7.5 & 2.5 \\
+ & Claude Opus 4   & 120 & 54.2 & 20.8 & 13.3 & 0.8 & 10.8 & 5.8 \\
 \midrule
 \multirow{3}{*}{OpenAI (4.1)}
- & GPT-4.1      & 150 & 44.0 & 28.7 & 12.7 & 2.0 & 12.7 & 25.3 \\
- & GPT-4.1-mini & 150 & 39.3 & 17.3 & 14.0 & 12.7 & 16.7 & 21.3 \\
- & GPT-4.1-nano & 150 & 28.0 & 41.3 & 7.3 & 6.0 & 17.3 & 16.7 \\
+ & GPT-4.1      & 120 & 54.2 & 14.2 & 17.5 & 2.5 & 11.7 & 97.5 \\
+ & GPT-4.1-mini & 120 & 50.8 & 15.8 & 16.7 & 1.7 & 13.3 & 100.0 \\
+ & GPT-4.1-nano & 120 & 35.0 & 27.5 & 10.8 & 10.0 & 16.7 & 96.7 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \subsection{Provider-Level Comparison}
 
-Aggregating by provider family (Table~\ref{tab:provider_results}) reveals two key findings:
+Aggregating by provider (Table~\ref{tab:provider_results}) reveals two key findings:
 
 \begin{table}[h]
 \centering
-\caption{Provider-level aggregation. Anthropic models show significantly higher faithfulness and implicit error detection than both OpenAI model families.}
+\caption{Provider-level aggregation. OpenAI models show dramatically higher implicit error detection rates than Anthropic models under the unified structured prompt, while Anthropic models show higher faithfulness.}
 \label{tab:provider_results}
 \vspace{0.5em}
 \begin{tabular}{@{}lccccc@{}}
 \toprule
 Provider & $n$ & Faithful\% & Decorative\% & Implicit Caught\% \\
 \midrule
-Anthropic       & 242 & 50.0 & 20.2 & 68.6 \\
-OpenAI (4o)     & 240 & 44.6 & 19.6 & 31.2 \\
-OpenAI (4.1)    & 450 & 37.1 & 29.1 & 21.1 \\
+Anthropic       & 240 & 56.7 & 22.1 & 4.2 \\
+OpenAI (4.1)    & 360 & 46.7 & 19.2 & 98.1 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\paragraph{Implicit error detection gap.} The most striking result is the provider-level gap in implicit error detection. Anthropic models detect embedded errors in 68.6\% of trials, compared to 31.2\% for the GPT-4o family and 21.1\% for GPT-4.1. Both comparisons are highly significant: Claude vs.\ GPT-4o, $p = 2.34 \times 10^{-16}$; Claude vs.\ GPT-4.1, $p = 9.65 \times 10^{-35}$ (Fisher's exact test). This suggests a fundamental architectural or training difference in how these model families process and evaluate intermediate reasoning.
+\paragraph{Implicit error detection divergence.} The most striking result is the near-total divergence in implicit error detection between providers. Under the unified structured prompt (Section~\ref{sec:method}), OpenAI models report detecting embedded errors in 98.1\% of trials (353/360), while Anthropic models report detection in only 4.2\% (10/240). This difference is astronomically significant ($p = 9.43 \times 10^{-143}$, Fisher's exact test). Importantly, this result was obtained using an \emph{identical} structured prompt across all models---previous versions of this experiment used different detection methodologies for each provider, making the comparison unreliable. The unified methodology reveals that the two model families respond to the same error-verification prompt in fundamentally different ways (see Section~\ref{sec:discussion} for interpretation).
 
-\paragraph{Faithfulness gap.} The faithfulness gap is smaller but significant for Claude vs.\ GPT-4.1 ($p = 1.21 \times 10^{-3}$). The comparison between GPT-4o and GPT-4.1 faithfulness does not reach significance ($p = 0.06$), suggesting that the 4o and 4.1 families are comparable in how much they utilize CoT, despite the 4.1 family being worse at detecting errors.
+\paragraph{Faithfulness gap.} Anthropic models show higher faithfulness (56.7\%) than OpenAI models (46.7\%), a modest but significant difference ($p = 1.95 \times 10^{-2}$, Fisher's exact test). This suggests that Anthropic models are more likely to genuinely track and propagate reasoning steps in their CoT traces.
 
 \subsection{Scaling Behavior}
 
-Within both the GPT-4o and GPT-4.1 families, we observe a clean monotonic relationship between model capability and both faithfulness and implicit error detection:
+Within the GPT-4.1 family, we observe a clean monotonic relationship between model capability and faithfulness:
 
 \begin{itemize}
-    \item \textbf{GPT-4o family:} GPT-4o (50.8\% faithful, 26.7\% implicit) $>$ GPT-4o-mini (38.3\% faithful, 35.8\% implicit).
-    \item \textbf{GPT-4.1 family:} GPT-4.1 (44.0\%, 25.3\%) $>$ GPT-4.1-mini (39.3\%, 21.3\%) $>$ GPT-4.1-nano (28.0\%, 16.7\%).
+    \item \textbf{GPT-4.1 family:} GPT-4.1 (54.2\% faithful) $>$ GPT-4.1-mini (50.8\%) $>$ GPT-4.1-nano (35.0\%).
+    \item \textbf{Anthropic:} Claude Sonnet 4 (59.2\%) $\approx$ Claude Opus 4 (54.2\%).
 \end{itemize}
 
-GPT-4.1-nano is particularly notable: it has the highest decorative rate of any model (41.3\%), meaning it ignores the corruption in its CoT more than any other model. This suggests that smaller models learn to \emph{mimic} the surface structure of chain-of-thought reasoning without genuinely tracking the logical dependencies between steps.
+Implicit error detection is uniformly high across all three OpenAI models (96.7--100\%) and uniformly low across both Anthropic models (2.5--5.8\%), so the implicit detection metric does not differentiate within provider families under the structured prompt.
+
+GPT-4.1-nano is particularly notable: it has the highest decorative rate of any model (27.5\%) and the highest mixed rate (10.0\%), meaning it ignores corruption or produces inconsistent outputs more than any other model. This suggests that smaller models learn to \emph{mimic} the surface structure of chain-of-thought reasoning without genuinely tracking the logical dependencies between steps.
 
 \subsection{Domain Breakdown}
 
@@ -207,38 +204,35 @@ Table~\ref{tab:domain_results} presents results broken down by reasoning domain.
 
 \begin{table}[h]
 \centering
-\caption{Faithfulness and implicit detection rates by domain and provider. Commonsense reasoning shows the largest provider gap in implicit detection.}
+\caption{Faithfulness and implicit detection rates by domain and provider. The implicit detection divergence persists across all three domains.}
 \label{tab:domain_results}
 \vspace{0.5em}
 \begin{tabular}{@{}llcc@{}}
 \toprule
 Domain & Provider & Faithful\% & Implicit\% \\
 \midrule
-\multirow{3}{*}{Math}
- & Anthropic    & 57.3 & 51.0 \\
- & OpenAI (4o)  & 46.2 & 20.0 \\
- & OpenAI (4.1) & 40.7 & 15.0 \\
+\multirow{2}{*}{Math}
+ & Anthropic    & 70.0 & 7.5 \\
+ & OpenAI (4.1) & 48.3 & 97.5 \\
 \midrule
-\multirow{3}{*}{Logic}
- & Anthropic    & 58.8 & 70.0 \\
- & OpenAI (4o)  & 62.5 & 46.0 \\
- & OpenAI (4.1) & 47.3 & 25.0 \\
+\multirow{2}{*}{Logic}
+ & Anthropic    & 63.8 & 5.0 \\
+ & OpenAI (4.1) & 63.3 & 99.2 \\
 \midrule
-\multirow{3}{*}{Commonsense}
- & Anthropic    & 33.8 & 85.0 \\
- & OpenAI (4o)  & 25.0 & 28.0 \\
- & OpenAI (4.1) & 23.3 & 24.0 \\
+\multirow{2}{*}{Commonsense}
+ & Anthropic    & 36.2 & 0.0 \\
+ & OpenAI (4.1) & 28.3 & 97.5 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 Three patterns emerge:
 
-\paragraph{Commonsense shows the largest implicit detection gap.} Anthropic models catch commonsense errors at 85\%, compared to 28\% (GPT-4o) and 24\% (GPT-4.1)---a roughly 3$\times$ difference. This domain involves trick questions and lateral thinking, where recognizing that a premise is flawed requires genuine semantic understanding rather than pattern-following.
+\paragraph{The implicit detection divergence is domain-independent.} OpenAI models report detecting errors at 97--99\% across all three domains, while Anthropic models report 0--8\%. This uniformity suggests the divergence reflects a systematic difference in how the two model families respond to structured error-verification prompts, rather than a domain-specific effect.
 
-\paragraph{Faithfulness is lowest for commonsense across all providers.} All providers show faithfulness below 34\% on commonsense problems. This is expected: commonsense trick questions have answers that resist modification by simple corruptions (e.g., ``roosters don't lay eggs'' is robust to changes in physical reasoning about egg trajectories).
+\paragraph{Faithfulness is lowest for commonsense across all providers.} Both providers show faithfulness below 37\% on commonsense problems. This is expected: commonsense trick questions have answers that resist modification by simple corruptions (e.g., ``roosters don't lay eggs'' is robust to changes in physical reasoning about egg trajectories).
 
-\paragraph{Logic shows high faithfulness for Anthropic and GPT-4o.} Both Anthropic (58.8\%) and GPT-4o (62.5\%) exhibit relatively high faithfulness on logic problems, suggesting that formal logical reasoning is an area where models genuinely track intermediate steps. The GPT-4.1 family lags at 47.3\%.
+\paragraph{Logic shows high faithfulness for both providers.} Both Anthropic (63.8\%) and OpenAI (63.3\%) exhibit relatively high faithfulness on logic problems, suggesting that formal logical reasoning is an area where models genuinely track intermediate steps. Math shows the largest faithfulness gap, with Anthropic at 70.0\% compared to OpenAI at 48.3\%.
 
 % ============================================================
 \section{Discussion}
@@ -247,13 +241,13 @@ Three patterns emerge:
 
 \subsection{The Paradox of Unfaithfulness}
 
-Our results reveal a surprising dissociation: a model can be \emph{unfaithful}---following corrupted reasoning to a wrong answer---while simultaneously being capable of \emph{detecting} the corruption when asked to verify. Consider Claude Sonnet 4: it follows corrupted reasoning 50\% of the time (faithful), yet catches implicitly embedded errors 70.5\% of the time. These are partially overlapping but distinct capabilities.
+Our results reveal a surprising dissociation between faithfulness and error detection. Consider GPT-4.1: it follows corrupted reasoning 54.2\% of the time (the faithful category), yet when presented with the same corrupted reasoning in a verification framing, it reports detecting the error 97.5\% of the time. Conversely, Claude Sonnet 4 has the highest faithfulness rate (59.2\%) but reports detecting errors in only 2.5\% of trials.
 
-This paradox suggests that ``following corrupted reasoning'' and ``evaluating reasoning for errors'' engage different computational pathways. When a model is told to follow a given chain of reasoning, it may engage a trace-following mode that faithfully propagates errors. When it encounters errors organically (Phase 3), it can engage an evaluation mode that catches them. The strength of this evaluation mode varies dramatically across providers.
+This paradox suggests that ``following corrupted reasoning'' and ``reporting errors in presented reasoning'' engage different computational pathways. When a model is told to follow a given chain of reasoning (Phase 2), it may engage a trace-following mode that faithfully propagates errors. When asked to verify reasoning (Phase 3), the response depends on provider-level tendencies that may reflect differences in training, instruction-following priorities, or safety calibration.
 
 \subsection{Decorative Chain-of-Thought}
 
-We define \emph{decorative CoT} as cases where the model produces reasoning-like text but its final answer is unaffected by the content of that text. Our highest decorative rate is GPT-4.1-nano at 41.3\%, compared to roughly 20\% for the larger models.
+We define \emph{decorative CoT} as cases where the model produces reasoning-like text but its final answer is unaffected by the content of that text. Our highest decorative rate is GPT-4.1-nano at 27.5\%, compared to 14--23\% for the larger models.
 
 This finding has practical implications for CoT-based systems. If a non-trivial fraction of CoT reasoning is decorative, then:
 \begin{enumerate}
@@ -262,17 +256,18 @@ This finding has practical implications for CoT-based systems. If a non-trivial 
     \item \textbf{Smaller models are worse offenders.} The scaling trend suggests that decorative CoT is more prevalent in less capable models, which are also the most likely to be deployed at scale due to cost constraints.
 \end{enumerate}
 
-\subsection{Provider Differences in Error Detection}
+\subsection{Provider Divergence in Implicit Error Detection}
 
-The 2--3$\times$ gap in implicit error detection between Anthropic and OpenAI models is the most robust finding in our study. Several hypotheses could explain this:
+The near-total divergence in implicit error detection---98.1\% for OpenAI vs.\ 4.2\% for Anthropic---is the most striking finding in our study and demands careful interpretation. Several hypotheses could explain this:
 
 \begin{itemize}
-    \item \textbf{Training differences.} Anthropic's constitutional AI and RLHF pipelines may prioritize self-consistency and error-correction capabilities more than OpenAI's training procedures.
-    \item \textbf{Architectural differences.} Internal attention patterns or representation structures may differ in ways that affect error sensitivity.
-    \item \textbf{Instruction following vs.\ reasoning.} OpenAI models may be more strongly optimized for instruction following (``continue from where I left off'') at the expense of critically evaluating the provided work.
+    \item \textbf{Prompt sensitivity.} The structured ``ERROR FOUND: YES/NO'' format may interact differently with each provider's instruction-following training. OpenAI models may be biased toward reporting errors when explicitly asked to look for them (a ``vigilance bias''), while Anthropic models may be calibrated toward confirming presented work unless errors are unambiguous.
+    \item \textbf{The hint effect.} Our Phase 3 prompt includes a note hinting at the corruption location (e.g., ``the solution may contain an error where\ldots''). OpenAI models may treat this hint as strong evidence of an error, while Anthropic models may evaluate the hint against the actual reasoning content and frequently conclude the reasoning is correct (which it often appears to be at a surface level).
+    \item \textbf{Training priorities.} Differences in RLHF, constitutional AI, or other alignment procedures may produce different base rates for error reporting. Anthropic models may be trained to avoid false positives in error detection, while OpenAI models may be trained to err on the side of flagging potential issues.
+    \item \textbf{A genuine capability difference.} It is possible that one provider's models are genuinely better at detecting subtle errors in reasoning chains. However, the near-ceiling (97--100\%) and near-floor (0--6\%) rates suggest this is more likely a calibration or prompt-sensitivity effect than a graded capability difference.
 \end{itemize}
 
-We cannot distinguish between these hypotheses with black-box experiments alone. However, the consistency of the gap across all three domains and all seven models suggests it reflects a systematic difference rather than an artifact of our problem set.
+We cannot distinguish between these hypotheses with black-box experiments alone. However, the uniformity of the effect across all five models and all three domains---and its persistence under an identical structured prompt---suggests it reflects a systematic provider-level difference in how models respond to error-verification tasks. Future work should investigate whether alternative prompt formulations (e.g., unstructured ``continue this work'' prompts, or prompts without error hints) produce different patterns.
 
 \subsection{Limitations}
 
@@ -280,9 +275,10 @@ Several limitations should be noted:
 
 \begin{itemize}
     \item \textbf{Problem set size.} Our 30-problem set, while spanning three domains, is not exhaustive. Results may differ on more complex multi-step problems or domain-specific technical reasoning.
-    \item \textbf{Corruption detection.} Our implicit detection metric relies on keyword matching (e.g., ``error,'' ``actually,'' ``wait''). This may under-count subtle corrections or over-count incidental use of these words.
+    \item \textbf{Implicit detection prompt.} While our unified structured prompt ensures cross-provider comparability, the near-ceiling and near-floor detection rates suggest the prompt may measure prompt-response tendencies as much as genuine error-detection capability. The inclusion of a hint about the corruption location makes the task easier than fully organic detection and may interact differently with each provider's training.
     \item \textbf{Temperature.} All trials use temperature 0.0. Stochastic sampling may yield different faithfulness patterns.
     \item \textbf{Answer extraction.} Our fuzzy matching classifier, while improved over naive string matching, may misclassify borderline cases. We report unclear rates to bound this effect.
+    \item \textbf{Model coverage.} We evaluate five models from two providers. The absence of GPT-4o, open-source models, and models from other providers limits the generalizability of our provider-level findings.
     \item \textbf{Black-box access.} We cannot verify that the internal computation actually follows or ignores the CoT; we can only observe the behavioral signature.
 \end{itemize}
 
@@ -291,16 +287,16 @@ Several limitations should be noted:
 \label{sec:conclusion}
 % ============================================================
 
-We have introduced a corruption-probe methodology for measuring the faithfulness of chain-of-thought reasoning in large language models. Across 932 trials and seven frontier models, we find that:
+We have introduced a corruption-probe methodology for measuring the faithfulness of chain-of-thought reasoning in large language models. Across 600 trials and five frontier models, we find that:
 
 \begin{enumerate}
-    \item CoT reasoning is faithful only 37--50\% of the time, with the remainder split between decorative, confused, and mixed behaviors.
-    \item Anthropic models detect implicitly embedded reasoning errors at 2--3$\times$ the rate of OpenAI models, a highly significant ($p < 10^{-15}$) provider-level difference.
-    \item Both faithfulness and error detection scale monotonically with model capability, with GPT-4.1-nano exhibiting the highest decorative rate (41.3\%).
-    \item Faithfulness and error detection are dissociable capabilities: a model can faithfully follow corrupted reasoning \emph{and} detect errors when prompted to verify.
+    \item CoT reasoning is faithful only 35--59\% of the time, with the remainder split between decorative, confused, and mixed behaviors.
+    \item Under a unified structured error-detection prompt, OpenAI models report detecting embedded errors at 97--100\% while Anthropic models report detection at only 2.5--5.8\%, a difference significant at $p < 10^{-142}$ that reveals a fundamental provider-level divergence in error-verification behavior.
+    \item Faithfulness scales monotonically with model capability within the GPT-4.1 family, with GPT-4.1-nano exhibiting the highest decorative rate (27.5\%).
+    \item Faithfulness and error detection are dissociable capabilities: a model can faithfully follow corrupted reasoning yet respond very differently when asked to verify that same reasoning.
 \end{enumerate}
 
-These findings challenge the assumption that CoT traces provide a transparent window into model reasoning and suggest that CoT-based interpretability and verification methods should be used with caution, particularly for smaller models and in safety-critical applications.
+These findings challenge the assumption that CoT traces provide a transparent window into model reasoning and suggest that CoT-based interpretability and verification methods should be used with caution, particularly for smaller models and in safety-critical applications. The dramatic provider divergence in implicit error detection further suggests that cross-provider benchmarks of reasoning verification must carefully control for prompt-sensitivity effects.
 
 \paragraph{Reproducibility.} Code and data are available at \url{https://github.com/alisaffarini/cot-faithfulness}.
 
@@ -365,6 +361,8 @@ We provide representative examples from each domain, along with their corruption
 \section{Detailed Classification Procedure}
 \label{app:classification}
 
-Answer matching proceeds in three stages: (1)~normalization (lowercasing, removing currency symbols, units, markdown formatting); (2)~direct substring containment; (3)~semantic equivalence mapping for yes/no/true/false variants. A trial is classified as \emph{unclear} if the following answer matches neither the expected wrong answer nor the correct answer after fuzzy matching. Parse failures (empty or unparseable responses) are excluded from percentage calculations. The unclear rate across all models averages 12.9\%, providing an upper bound on classification error.
+Answer matching proceeds in three stages: (1)~normalization (lowercasing, removing currency symbols, units, markdown formatting); (2)~direct substring containment; (3)~semantic equivalence mapping for yes/no/true/false variants. A trial is classified as \emph{unclear} if the following answer matches neither the expected wrong answer nor the correct answer after fuzzy matching. Parse failures (empty or unparseable responses) are excluded from percentage calculations. The unclear rate across all models averages 12.3\%, providing an upper bound on classification error.
+
+For Phase 3 implicit error detection, we use a unified structured prompt across all providers. The model is asked to respond with \texttt{ERROR FOUND: YES} or \texttt{ERROR FOUND: NO}, followed by a description and corrected answer. Detection is scored by parsing the structured response, eliminating the ambiguity of keyword-based detection used in earlier versions of this experiment.
 
 \end{document}
