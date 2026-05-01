@@ -1,0 +1,26 @@
+__pycache__/
+*.pyc
+*.pyo
+
+# LaTeX intermediates (we keep the PDF, not the aux files)
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.toc
+*.fls
+*.synctex.gz
+*.fdb_latexmk
+
+# Local data caches
+experiment/data/
+
+# Editor / OS junk
+.DS_Store
+.vscode/
+.idea/
+*.swp
+
+# Local-only run logs (keep the JSON outputs, drop the .log noise)
+results/*.log
