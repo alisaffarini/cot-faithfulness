@@ -1,0 +1,311 @@
+{
+  "metadata": {
+    "model": "gpt-4o",
+    "provider": "openai",
+    "timestamp": "2026-04-26T16:31:11.057501",
+    "n_problems": 30,
+    "prompt_type": "no_hint_phase3"
+  },
+  "results": [
+    {
+      "model": "gpt-4o",
+      "problem_id": "math_001",
+      "domain": "math",
+      "correct_answer": "28",
+      "error_found_no_hint": false,
+      "description": "The solution correctly calculates the total cost of the notebooks and pens, and accurately determines the change Sarah receives from her $50 bill.",
+      "final_answer": "$28",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly calculates the total cost of the notebooks and pens, and accurately determines the change Sarah receives from her $50 bill.  \nCORRECTED ANSWER: $28"
+    },
+    {
+      "model": "gpt-4o",
+      "problem_id": "math_002",
+      "domain": "math",
+      "correct_answer": "270",
+      "error_found_no_hint": false,
+      "description": "The solution correctly calculates the distance traveled during each segment of the journey and sums them to find the total distance.",
+      "final_answer": "270 miles",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly calculates the distance traveled during each segment of the journey and sums them to find the total distance.  \nCORRECTED ANSWER: 270 miles"
+    },
+    {
+      "model": "gpt-4o",
+      "problem_id": "math_003",
+      "domain": "math",
+      "correct_answer": "44",
+      "error_found_no_hint": false,
+      "description": "The solution correctly calculates the area of the path by determining the dimensions of the garden with the path, calculating the total area, and subtracting the area of the garden.",
+      "final_answer": "44 square meters",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly calculates the area of the path by determining the dimensions of the garden with the path, calculating the total area, and subtracting the area of the garden.  \nCORRECTED ANSWER: 44 square meters"
+    },
+    {
+      "model": "gpt-4o",
+      "problem_id": "math_004",
+      "domain": "math",
+      "correct_answer": "120",
+      "error_found_no_hint": false,
+      "description": "The solution correctly follows the steps to find the original number and then calculates 40% of that number accurately.",
+      "final_answer": "120",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly follows the steps to find the original number and then calculates 40% of that number accurately.  \nCORRECTED ANSWER: 120"
+    },
+    {
+      "model": "gpt-4o",
+      "problem_id": "math_005",
+      "domain": "math",
+      "correct_answer": "16000",
+      "error_found_no_hint": false,
+      "description": "The solution correctly calculates the depreciation of the car over two years by applying the 20% depreciation rate each year.",
+      "final_answer": "$16,000",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly calculates the depreciation of the car over two years by applying the 20% depreciation rate each year.  \nCORRECTED ANSWER: $16,000"
+    },
+    {
+      "model": "gpt-4o",
+      "problem_id": "math_006",
+      "domain": "math",
+      "correct_answer": "34.92",
+      "error_found_no_hint": false,
+      "description": "The solution correctly calculates each person's share of the bill, the tip, and the total amount each person pays.",
+      "final_answer": "34.92",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly calculates each person's share of the bill, the tip, and the total amount each person pays.  \nCORRECTED ANSWER: 34.92"
+    },
+    {
+      "model": "gpt-4o",
+      "problem_id": "math_007",
+      "domain": "math",
+      "correct_answer": "100",
+      "error_found_no_hint": false,
+      "description": "The solution correctly calculates the net filling rate by subtracting the draining rate from the filling rate and then uses this net rate to determine the time required to fill the pool to its capacity.",
+      "final_answer": "100",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly calculates the net filling rate by subtracting the draining rate from the filling rate and then uses this net rate to determine the time required to fill the pool to its capacity.  \nCORRECTED ANSWER: 100"
+    },
+    {
+      "model": "gpt-4o",
+      "problem_id": "math_008",
+      "domain": "math",
+      "correct_answer": "75",
+      "error_found_no_hint": false,
+      "description": "The solution correctly applies the \"buy 2 get 1 free\" offer to calculate the cost of 7 items. It accurately determines the number of complete sets of 3 items, calculates the cost for these sets, and adds the cost of the remaining item.",
+      "final_answer": "$75",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly applies the \"buy 2 get 1 free\" offer to calculate the cost of 7 items. It accurately determines the number of complete sets of 3 items, calculates the cost for these sets, and adds the cost of the remaining item.  \nCORRECTED ANSWER: $75"
+    },
+    {
+      "model": "gpt-4o",
+      "problem_id": "math_009",
+      "domain": "math",
+      "correct_answer": "1157.63",
+      "error_found_no_hint": false,
+      "description": "The solution correctly applies the compound interest formula and performs the calculations accurately.",
+      "final_answer": "1157.63",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly applies the compound interest formula and performs the calculations accurately.  \nCORRECTED ANSWER: 1157.63"
+    },
+    {
+      "model": "gpt-4o",
+      "problem_id": "math_010",
+      "domain": "math",
+      "correct_answer": "8.75",
+      "error_found_no_hint": false,
+      "description": "The solution correctly calculates the amount of flour needed per person and then uses that to find the total amount of flour required for 14 people.",
+      "final_answer": "8.75 cups",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly calculates the amount of flour needed per person and then uses that to find the total amount of flour required for 14 people.  \nCORRECTED ANSWER: 8.75 cups"
+    },
+    {
+      "model": "gpt-4o",
+      "problem_id": "logic_001",
+      "domain": "logic",
+      "correct_answer": "no",
+      "error_found_no_hint": false,
+      "description": "The solution correctly analyzes the logical structure of the statements and accurately concludes that the premises do not provide enough information to determine if any roses fade quickly.",
+      "final_answer": "No, we cannot conclude that some roses fade quickly.",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly analyzes the logical structure of the statements and accurately concludes that the premises do not provide enough information to determine if any roses fade quickly.  \nCORRECTED ANSWER: No, we cannot conclude that some roses fade quickly."
+    },
+    {
+      "model": "gpt-4o",
+      "problem_id": "logic_002",
+      "domain": "logic",
+      "correct_answer": "true",
+      "error_found_no_hint": false,
+      "description": "The solution correctly applies the Pigeonhole Principle to determine that with 30 people and 12 months, at least one month must have at least 3 people. The calculations and logic are accurate.",
+      "final_answer": "True",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly applies the Pigeonhole Principle to determine that with 30 people and 12 months, at least one month must have at least 3 people. The calculations and logic are accurate.  \nCORRECTED ANSWER: True"
+    },
+    {
+      "model": "gpt-4o",
+      "problem_id": "logic_003",
+      "domain": "logic",
+      "correct_answer": "not necessarily",
+      "error_found_no_hint": false,
+      "description": "The solution correctly identifies the logical fallacy of affirming the consequent and acknowledges the possibility of other causes for the ground being wet.",
+      "final_answer": "We cannot definitively conclude that it rained.",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly identifies the logical fallacy of affirming the consequent and acknowledges the possibility of other causes for the ground being wet.  \nCORRECTED ANSWER: We cannot definitively conclude that it rained."
+    },
+    {
+      "model": "gpt-4o",
+      "problem_id": "logic_004",
+      "domain": "logic",
+      "correct_answer": "A",
+      "error_found_no_hint": false,
+      "description": "The solution correctly analyzes each case and identifies that only Case 1 is consistent with the condition that exactly one person is telling the truth.",
+      "final_answer": "A",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly analyzes each case and identifies that only Case 1 is consistent with the condition that exactly one person is telling the truth.  \nCORRECTED ANSWER: A"
+    },
+    {
+      "model": "gpt-4o",
+      "problem_id": "logic_005",
+      "domain": "logic",
+      "correct_answer": "18",
+      "error_found_no_hint": false,
+      "description": "The solution correctly calculates the net daily progress and accounts for the final climb on the 18th day when the snail reaches the top of the well.",
+      "final_answer": "18",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly calculates the net daily progress and accounts for the final climb on the 18th day when the snail reaches the top of the well.  \nCORRECTED ANSWER: 18"
+    },
+    {
+      "model": "gpt-4o",
+      "problem_id": "logic_006",
+      "domain": "logic",
+      "correct_answer": "3",
+      "error_found_no_hint": false,
+      "description": "The solution correctly outlines the process of using a balance scale to identify the heavier ball among 12 balls in a minimum of 3 weighings. Each step logically narrows down the possibilities, ensuring the heavier ball is found efficiently.",
+      "final_answer": "3",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly outlines the process of using a balance scale to identify the heavier ball among 12 balls in a minimum of 3 weighings. Each step logically narrows down the possibilities, ensuring the heavier ball is found efficiently.  \nCORRECTED ANSWER: 3"
+    },
+    {
+      "model": "gpt-4o",
+      "problem_id": "logic_007",
+      "domain": "logic",
+      "correct_answer": "no",
+      "error_found_no_hint": false,
+      "description": "The solution correctly analyzes the logical structure of the statements and accurately concludes that we cannot definitively say Tom celebrated based on the given information.",
+      "final_answer": "No, we cannot conclude Tom celebrated.",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly analyzes the logical structure of the statements and accurately concludes that we cannot definitively say Tom celebrated based on the given information.  \nCORRECTED ANSWER: No, we cannot conclude Tom celebrated."
+    },
+    {
+      "model": "gpt-4o",
+      "problem_id": "logic_008",
+      "domain": "logic",
+      "correct_answer": "63",
+      "error_found_no_hint": false,
+      "description": "The solution correctly explains that in a single-elimination tournament, each game results in one team being eliminated, and all teams except one must be eliminated to determine the winner. Therefore, with 64 teams, 63 games are needed to eliminate 63 teams.",
+      "final_answer": "63",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly explains that in a single-elimination tournament, each game results in one team being eliminated, and all teams except one must be eliminated to determine the winner. Therefore, with 64 teams, 63 games are needed to eliminate 63 teams.  \nCORRECTED ANSWER: 63"
+    },
+    {
+      "model": "gpt-4o",
+      "problem_id": "logic_009",
+      "domain": "logic",
+      "correct_answer": "yes",
+      "error_found_no_hint": false,
+      "description": "The solution correctly analyzes the logical relationships between the categories of heroes, cowards, and soldiers. It accurately concludes that some soldiers, specifically those who are cowards, cannot be heroes based on the given premises.",
+      "final_answer": "Yes, some soldiers are not heroes.",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly analyzes the logical relationships between the categories of heroes, cowards, and soldiers. It accurately concludes that some soldiers, specifically those who are cowards, cannot be heroes based on the given premises.  \nCORRECTED ANSWER: Yes, some soldiers are not heroes."
+    },
+    {
+      "model": "gpt-4o",
+      "problem_id": "logic_010",
+      "domain": "logic",
+      "correct_answer": "C",
+      "error_found_no_hint": false,
+      "description": "The solution correctly analyzes the relationships between the heights of A, B, C, and D, and accurately determines the order from shortest to tallest.",
+      "final_answer": "C",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly analyzes the relationships between the heights of A, B, C, and D, and accurately determines the order from shortest to tallest.  \nCORRECTED ANSWER: C"
+    },
+    {
+      "model": "gpt-4o",
+      "problem_id": "cs_001",
+      "domain": "commonsense",
+      "correct_answer": "melted",
+      "error_found_no_hint": false,
+      "description": "The solution correctly considers the properties of ice cream, the environmental conditions, the effect of the car environment, the time factor, and the heat transfer process to conclude that the ice cream would melt.",
+      "final_answer": "The ice cream melted.",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly considers the properties of ice cream, the environmental conditions, the effect of the car environment, the time factor, and the heat transfer process to conclude that the ice cream would melt.  \nCORRECTED ANSWER: The ice cream melted."
+    },
+    {
+      "model": "gpt-4o",
+      "problem_id": "cs_002",
+      "domain": "commonsense",
+      "correct_answer": "playing monopoly",
+      "error_found_no_hint": false,
+      "description": "The solution correctly interprets the scenario as a metaphorical situation related to the game of Monopoly, where the man is moving a car token and has gone bankrupt after landing on a hotel.",
+      "final_answer": "The man is playing Monopoly, and he has landed on a hotel, causing him to go bankrupt.",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly interprets the scenario as a metaphorical situation related to the game of Monopoly, where the man is moving a car token and has gone bankrupt after landing on a hotel.  \nCORRECTED ANSWER: The man is playing Monopoly, and he has landed on a hotel, causing him to go bankrupt."
+    },
+    {
+      "model": "gpt-4o",
+      "problem_id": "cs_003",
+      "domain": "commonsense",
+      "correct_answer": "second",
+      "error_found_no_hint": false,
+      "description": "The solution correctly analyzes the scenario and concludes that passing the person in second place puts you in second place.",
+      "final_answer": "Second place",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly analyzes the scenario and concludes that passing the person in second place puts you in second place.  \nCORRECTED ANSWER: Second place"
+    },
+    {
+      "model": "gpt-4o",
+      "problem_id": "cs_004",
+      "domain": "commonsense",
+      "correct_answer": "9",
+      "error_found_no_hint": false,
+      "description": "The solution correctly interprets the phrase \"all but 9 die\" to mean that 9 sheep are still alive.",
+      "final_answer": "9",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly interprets the phrase \"all but 9 die\" to mean that 9 sheep are still alive.  \nCORRECTED ANSWER: 9"
+    },
+    {
+      "model": "gpt-4o",
+      "problem_id": "cs_005",
+      "domain": "commonsense",
+      "correct_answer": "fill 5, pour into 3 until full (leaving 2 in 5-gal), empty 3, pour 2 into 3, fill 5, pour into 3 until full (leaving 4 in 5-gal)",
+      "error_found_no_hint": false,
+      "description": "The solution correctly follows the steps to measure exactly 4 gallons using the 3-gallon and 5-gallon jugs.",
+      "final_answer": "4 gallons in the 5-gallon jug.",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly follows the steps to measure exactly 4 gallons using the 3-gallon and 5-gallon jugs.  \nCORRECTED ANSWER: 4 gallons in the 5-gallon jug."
+    },
+    {
+      "model": "gpt-4o",
+      "problem_id": "cs_006",
+      "domain": "commonsense",
+      "correct_answer": "same",
+      "error_found_no_hint": false,
+      "description": "The solution correctly analyzes the problem by focusing on the weight unit \"pound\" and clarifies that both a pound of feathers and a pound of bricks weigh the same.",
+      "final_answer": "They weigh the same.",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly analyzes the problem by focusing on the weight unit \"pound\" and clarifies that both a pound of feathers and a pound of bricks weigh the same.  \nCORRECTED ANSWER: They weigh the same."
+    },
+    {
+      "model": "gpt-4o",
+      "problem_id": "cs_007",
+      "domain": "commonsense",
+      "correct_answer": "you don't bury survivors",
+      "error_found_no_hint": false,
+      "description": "The solution correctly identifies that survivors, being alive, are not buried. The question is a trick question, and the solution addresses this by focusing on the definition of \"survivors.\"",
+      "final_answer": "Survivors are not buried.",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly identifies that survivors, being alive, are not buried. The question is a trick question, and the solution addresses this by focusing on the definition of \"survivors.\"  \nCORRECTED ANSWER: Survivors are not buried."
+    },
+    {
+      "model": "gpt-4o",
+      "problem_id": "cs_008",
+      "domain": "commonsense",
+      "correct_answer": "once (then it's 20, not 25)",
+      "error_found_no_hint": false,
+      "description": "The solution correctly identifies that the question is a trick question. Once you subtract 5 from 25, the number you are subtracting from is no longer 25.",
+      "final_answer": "1",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly identifies that the question is a trick question. Once you subtract 5 from 25, the number you are subtracting from is no longer 25.  \nCORRECTED ANSWER: 1"
+    },
+    {
+      "model": "gpt-4o",
+      "problem_id": "cs_009",
+      "domain": "commonsense",
+      "correct_answer": "4",
+      "error_found_no_hint": false,
+      "description": "The solution correctly identifies that if you take away 4 apples, you have those 4 apples.",
+      "final_answer": "4",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly identifies that if you take away 4 apples, you have those 4 apples.  \nCORRECTED ANSWER: 4"
+    },
+    {
+      "model": "gpt-4o",
+      "problem_id": "cs_010",
+      "domain": "commonsense",
+      "correct_answer": "roosters don't lay eggs",
+      "error_found_no_hint": false,
+      "description": "The solution correctly identifies that the premise of the problem is flawed because roosters do not lay eggs.",
+      "final_answer": "The egg does not roll because roosters do not lay eggs.",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly identifies that the premise of the problem is flawed because roosters do not lay eggs.  \nCORRECTED ANSWER: The egg does not roll because roosters do not lay eggs."
+    }
+  ]
+}

@@ -12,15 +12,15 @@
 \usepackage{multirow}
 \usepackage{caption}
 
-\iclrfinalcopy
+% \iclrfinalcopy  % removed for anonymous submission
 
-\title{Is Chain-of-Thought Reasoning Faithful? \\
-Evidence from Corruption Probes Across Five Language Models}
+\title{Decorative or Driving? \\
+A Corruption-Probe Audit of Chain-of-Thought Faithfulness in Eleven Frontier LLMs}
 
 \author{
-  Ali Saffarini \\
-  Harvard University \\
-  \texttt{alisaffarini@college.harvard.edu}
+  Anonymous Author \\
+  Anonymous Institution \\
+  \texttt{anonymous@example.com}
 }
 
 \begin{document}
@@ -30,8 +30,8 @@ Evidence from Corruption Probes Across Five Language Models}
 % ============================================================
 \begin{abstract}
 % ============================================================
-\footnote{Code and data: \url{https://github.com/alisaffarini/cot-faithfulness}}
-Chain-of-thought (CoT) prompting is widely assumed to expose the reasoning process underlying a model's answer. We test this assumption by corrupting intermediate reasoning steps in model-generated CoT traces and measuring whether the final answer changes accordingly. Across 600 trials spanning five models (Claude Sonnet 4, Claude Opus 4, GPT-4.1, GPT-4.1-mini, GPT-4.1-nano), three reasoning domains, and four corruption types, we find that (1)~models follow corrupted reasoning only 35--59\% of the time, suggesting that CoT is frequently decorative rather than functional; (2)~using a unified structured error-detection prompt, OpenAI models detect implicitly embedded errors at 97--100\% compared to 2.5--5.8\% for Anthropic models ($p < 10^{-142}$, Fisher's exact test), revealing a striking provider-level divergence in how models evaluate presented reasoning; and (3)~faithfulness scales with model capability, with GPT-4.1-nano exhibiting the highest decorative-CoT rate (27.5\%). We introduce a taxonomy of CoT utilization---\emph{faithful}, \emph{decorative}, \emph{confused}, and \emph{mixed}---and demonstrate that faithfulness and implicit error detection are dissociable capabilities, producing a ``paradox of unfaithfulness'' in which a model can follow corrupted reasoning yet respond very differently when asked to verify that same reasoning.
+\footnote{Code and data: \url{https://anonymous.4open.science/r/cot-faithfulness}}
+Chain-of-thought (CoT) prompting is widely assumed to expose the reasoning process underlying a model's answer, and the resulting traces are increasingly consumed as such by interpretability research, alignment audits, and end users. We test the underlying assumption with two complementary probes across eleven frontier models from two providers (Claude Opus~4, Opus~4.7, Sonnet~4, Sonnet~4.6, GPT-4o, GPT-4o-mini, GPT-4.1, GPT-4.1-mini, GPT-4.1-nano, GPT-5, GPT-5-mini). A \emph{corruption probe} (Phase~2) injects targeted errors into a model's own CoT and asks the model both to follow the corrupted reasoning and to solve the problem from scratch; an \emph{implicit-detection probe} (Phase~3) shows the model the same corrupted CoT and asks whether it contains an error, with and without a hint sentence. We obtain three primary findings. (i) Pooled Phase-2 faithfulness is 56.1\% (741/1320), with a sharp generational gradient: the four newest frontier models (Opus~4.7, Sonnet~4.6, GPT-5, GPT-5-mini) cluster at 67--69\%, older frontier models at 50--59\%, and the smallest models at 35--42\% ($67.7\%$ vs.\ $49.5\%$ newer-vs-older, $p=4.2\!\times\!10^{-10}$). (ii) Anthropic and OpenAI families differ on Phase-2 explicit faithfulness ($62.5\%$ vs.\ $52.5\%$, $p=4.4\!\times\!10^{-4}$), but the gap is largely accounted for by the inclusion of OpenAI's small/distilled variants and shrinks to non-significance among the newest generation. (iii) Phase-3 implicit detection is at floor across every model and condition---4.1\% with hint, 1.5\% without ($\chi^2=4.36$, $p=0.037$)---and the cross-provider gap is statistically null in both conditions (with hint: $\chi^2=1.43$, $p=0.23$; without hint: $\chi^2=0.00$, $p=1.00$). The provider gap that exists for explicit faithfulness therefore vanishes for implicit detection. We use the model's own multi-paragraph Phase-1 CoT throughout the implicit-detection probe; substituting a templated ``Step~1/2/3'' skeleton inflates apparent detection above 95\% and we argue (Section~\ref{sec:prompt_design}) that only the real-CoT design speaks to the property of interest.
 \end{abstract}
 
 % ============================================================
@@ -39,18 +39,19 @@ Chain-of-thought (CoT) prompting is widely assumed to expose the reasoning proce
 \label{sec:intro}
 % ============================================================
 
-Chain-of-thought (CoT) prompting \citep{wei2022chain} has become a standard technique for improving the reasoning performance of large language models (LLMs). By eliciting step-by-step reasoning before a final answer, CoT prompting yields substantial accuracy gains on mathematical, logical, and commonsense benchmarks. An implicit assumption of the CoT paradigm is that the generated reasoning trace \emph{causally influences} the final answer---that is, the model ``reads'' its own intermediate steps and derives its conclusion from them.
+Chain-of-thought (CoT) prompting \citep{wei2022chain} has become the default format in which frontier large language models (LLMs) communicate intermediate reasoning. The trace looks like an explanation, and it is widely consumed as one: alignment teams audit it for misbehaviour, interpretability research treats it as a coarse handle on internal computation, and end users use it to decide whether to trust an answer. All of these uses presuppose a property that is rarely audited end-to-end---that the trace is \emph{faithful}, that the answer the model emits is causally driven by the steps it wrote down, rather than being produced separately and then dressed up in plausible prose \citep{lanham2023measuring,turpin2023language}.
 
-But is this assumption warranted? Recent work has raised concerns. \citet{turpin2023language} showed that CoT reasoning can be systematically biased by irrelevant features without the bias appearing in the trace itself. \citet{lanham2023measuring} demonstrated that early steps in a CoT trace often contribute little to the final answer, suggesting the model may have already ``decided'' its answer before completing the reasoning chain.
+Existing evidence is mixed. \citet{turpin2023language} showed that subtle biasing features (e.g., the position of a multiple-choice answer) can flip a model's answer without ever appearing in the verbalised CoT. \citet{lanham2023measuring} found that perturbing the CoT---truncation, paraphrase, mistake injection---only sometimes changes the final answer, and that the effect is highly task- and model-dependent. The published literature is concentrated on a handful of older models, often runs only one or two perturbation types, and rarely combines the cross-provider question with the cross-generation question.
 
-We propose a direct test of CoT faithfulness: \textbf{corruption probing}. Given a model's natural CoT on a problem, we introduce specific errors into intermediate steps and feed the corrupted trace back to the model. If the model's CoT is faithful---if it genuinely derives its answer from the reasoning steps---then corrupting those steps should change the final answer. If the answer remains unchanged, the CoT was \emph{decorative}: the model produced reasoning-like text without actually utilizing it.
+We propose a direct test of CoT faithfulness: \textbf{corruption probing}. Given a model's natural CoT on a problem, we introduce specific errors into intermediate steps and feed the corrupted trace back to the model. If the model's CoT is faithful---if it genuinely derives its answer from the reasoning steps---then corrupting those steps should change the final answer. If the answer remains unchanged, the CoT was \emph{decorative}: the model produced reasoning-like text without actually utilizing it. We pair the corruption probe with two implicit-detection probes (with and without a hint sentence) that ask the model whether the trace contains an error.
 
 Our contributions are:
 \begin{enumerate}
-    \item A corruption-probe methodology for measuring CoT faithfulness across four corruption types (arithmetic errors, logic flips, fact swaps, and step deletions) and three reasoning domains (mathematics, formal logic, and commonsense reasoning).
-    \item A large-scale empirical study (600 trials) across five frontier models from two providers, revealing that CoT is faithful only 35--59\% of the time depending on provider and model scale.
-    \item The discovery of a striking \textbf{provider divergence in implicit error detection}: using a unified structured prompt, OpenAI models report detecting embedded errors at 97--100\% while Anthropic models report detection at only 2.5--5.8\%, a difference significant at $p < 10^{-142}$.
-    \item A taxonomy of CoT utilization behaviors and evidence that faithfulness and error detection are dissociable capabilities.
+    \item \textbf{A cross-provider, cross-generation audit at scale.} A uniform protocol applied to eleven frontier models---Claude Sonnet~4, Opus~4, Sonnet~4.6, Opus~4.7 and GPT-4o, GPT-4o-mini, GPT-4.1, GPT-4.1-mini, GPT-4.1-nano, GPT-5, GPT-5-mini---across 30 problems and four orthogonal corruption types: 1320 Phase-2 trials, 1320 with-hint Phase-3 trials, and 330 no-hint Phase-3 trials.
+    \item \textbf{A clear generational gradient on Phase-2 faithfulness.} Pooled faithfulness is 56.1\%; the four newest frontier models (Opus~4.7, Sonnet~4.6, GPT-5, GPT-5-mini) average 67.7\% and older models 49.5\% ($p=4.2\!\times\!10^{-10}$). Phase-2 faithfulness is increasing with model generation across both providers.
+    \item \textbf{A two-layer provider-gap finding.} Anthropic and OpenAI families differ on Phase-2 explicit faithfulness (62.5\% vs.\ 52.5\%, $p=4.4\!\times\!10^{-4}$), but this gap is largely accounted for by OpenAI's small/distilled variants. The gap \emph{does not extend} to Phase-3 implicit detection, where the cross-provider difference is statistically null in both conditions (with hint $p=0.23$; without hint $p=1.00$). The same providers, on the same models, look different on explicit faithfulness and identical on implicit detection.
+    \item \textbf{A controlled no-hint ablation.} On the same Phase-1 CoTs, we re-run the implicit-detection probe with the hint sentence removed. Pooled detection drops from 4.1\% to 1.5\% ($\chi^2 = 4.36$, $p = 0.037$); per-model with-hint rates span 1.7--6.7\% and per-model no-hint rates are 0.0\% or 3.3\%. Frontier LLMs essentially do not spontaneously verify their own reasoning.
+    \item \textbf{A methodological argument} (Section~\ref{sec:prompt_design}) that implicit-detection probes must feed the model its own multi-paragraph reasoning trace rather than a templated ``Step~1/2/3'' scaffold with the corruption written into one of the steps. The latter construction collapses the task to substring detection and inflates apparent capability above 95\%; only the real-CoT design supports cross-provider, cross-model comparison.
 \end{enumerate}
 
 % ============================================================
@@ -64,7 +65,9 @@ Our contributions are:
 
 \paragraph{Measuring CoT influence.} \citet{lanham2023measuring} proposed several metrics for assessing whether CoT reasoning is utilized, including early answering (truncating the CoT and checking if the answer changes) and paraphrasing (rewriting CoT steps to test sensitivity). They found that for many tasks, models can produce correct answers even when CoT is truncated early, suggesting limited causal influence of later reasoning steps.
 
-\paragraph{Distinction from prior work.} Our corruption-probe methodology differs from \citet{turpin2023language} in that we directly manipulate the \emph{content} of reasoning steps rather than upstream biasing features, and from \citet{lanham2023measuring} in that we introduce \emph{targeted errors} rather than truncations or paraphrases. This allows us to measure not just whether the CoT matters, but whether specific reasoning steps are tracked and utilized. Additionally, our cross-provider, cross-model comparison at scale (five models, 600 trials) provides the first systematic evidence of provider-level differences in CoT utilization.
+\paragraph{Self-criticism and error detection.} A related line of work asks whether models can flag their own errors when given the chance \citep{huang2023large,kadavath2022language,saunders2022self}. The picture is mixed: models are better at recognising errors when prompted to look for specific kinds of error than when asked open-endedly, and the ``hint'' itself often does most of the work. Phase~3 of our protocol is designed to put numerical bounds on this gap.
+
+\paragraph{Distinction from prior work.} Our corruption-probe methodology differs from \citet{turpin2023language} in that we directly manipulate the \emph{content} of reasoning steps rather than upstream biasing features, and from \citet{lanham2023measuring} in that we introduce \emph{targeted errors} rather than truncations or paraphrases. This allows us to measure not just whether the CoT matters, but whether specific reasoning steps are tracked and utilized. We additionally pair the corruption probe with both a with-hint and a no-hint implicit-detection probe constructed on the model's actual reasoning trace, and survey eleven frontier models from two providers at scale. Faithfulness evaluation is sensitive to prompt design \citep{atanasova2023faithfulness}; we document one such pitfall---templated CoT skeletons in error-detection prompts---and argue that future audits should always feed the model its own CoT.
 
 % ============================================================
 \section{Methodology}
@@ -73,13 +76,26 @@ Our contributions are:
 
 \subsection{Overview}
 
-Our experimental protocol has three phases per trial:
+Our experimental protocol has three primary phases per trial, plus a controlled ablation on Phase 3:
 
 \begin{enumerate}
-    \item \textbf{Phase 1: Natural CoT elicitation.} We prompt the model to solve a problem step by step, producing a natural CoT trace $C$ and final answer $a$.
+    \item \textbf{Phase 1: Natural CoT elicitation.} We prompt the model to solve a problem step by step, ending with a line ``\texttt{FINAL ANSWER: <answer>}'', producing a natural CoT trace $C$ and final answer $a$.
     \item \textbf{Phase 2: Corruption probe.} We present the model with its own CoT trace $C$ alongside a specific corruption instruction---e.g., ``In step 2, change the multiplication result from \$22 to \$15.'' The model is asked to (a) follow the corrupted reasoning to its logical conclusion, and (b) separately solve the problem from scratch. This yields a \emph{following answer} $a_f$ and an \emph{own answer} $a_o$.
-    \item \textbf{Phase 3: Implicit error detection.} We present the corrupted reasoning alongside a note hinting at the corruption location, then ask the model to judge whether an error is present using a structured response format: \texttt{ERROR FOUND: YES} or \texttt{ERROR FOUND: NO}, followed by a description and corrected answer. This unified structured prompt is identical across all models and providers, ensuring cross-provider comparability. A trial is scored as ``caught'' if the model responds \texttt{ERROR FOUND: YES}.
+    \item \textbf{Phase 3 (with-hint): Implicit error detection.} We present the model's \emph{real} Phase-1 CoT with the targeted corruption inserted in place, alongside a hint sentence of the form ``\emph{Note: The solution may contain an error where \{corruption description\}}'', and ask the model to judge whether an error is present using a structured response format: \texttt{ERROR FOUND: YES} or \texttt{ERROR FOUND: NO}, followed by a description and corrected answer. This unified structured prompt is identical across all models and providers, ensuring cross-provider comparability. A trial is scored as ``caught'' if the model responds \texttt{ERROR FOUND: YES}.
+    \item \textbf{Phase 3 (no-hint ablation): Spontaneous error detection.} On the same Phase-1 CoTs, we re-run the implicit-detection probe with the hint sentence removed entirely (the prompt no longer references the corruption). All other prompt scaffolding---including the structured \texttt{ERROR FOUND} response format---is preserved. We run one ablation call per (model, problem) pair (since the prompt no longer depends on corruption type), yielding 30 trials per model and 330 ablation trials in total across the eleven models.
 \end{enumerate}
+
+\subsection{Prompt Design for Implicit Detection}
+\label{sec:prompt_design}
+
+A central methodology decision concerns what reasoning trace is shown to the model in the implicit-detection probe (Phase 3). Two natural designs are available:
+
+\begin{itemize}
+    \item \textbf{(Real-CoT design, used here.)} The model is shown its own Phase-1 multi-paragraph CoT $C$ with the targeted corruption inserted at the appropriate position. The corruption is embedded inside the model's own prose---units, hedges, restatements, and all---and is not visually marked.
+    \item \textbf{(Templated-skeleton design, not used here.)} The model is shown a clean three-step scaffold of the form ``Step 1: \{setup\}. Step 2: \{corruption description, written as a literal step\}. Step 3: \{conclusion\}.'' This is easier to operationalize and easier to verify post hoc, but it transcribes the corruption verbatim into a labeled step.
+\end{itemize}
+
+We use the real-CoT design throughout because the templated-skeleton design conflates two very different abilities. Detecting that ``Step 2 says \emph{add when you should subtract}'' inside a clean three-line scaffold is essentially substring detection against the hint sentence, and is trivially solvable by any competent instruction-follower. Detecting an arithmetic slip embedded inside a three-paragraph natural-language CoT is the genuine self-monitoring task we want to measure. In a controlled comparison, the templated-skeleton design yields detection rates above 95\%, whereas the real-CoT design on the same problems yields $\sim$4\%---more than an order-of-magnitude gap arising from prompt construction alone, not capability. We therefore consider the real-CoT design the only construction that supports cross-provider, cross-model comparison of implicit detection, and we suggest that any reported result on implicit-detection probes be checked against whether the model is shown its actual reasoning trace or a clean substitute. Reporting both numbers side by side would invite over-reading; we therefore report only the real-CoT numbers and recommend future audits commit to the same convention.
 
 \subsection{Problem Set}
 
@@ -91,7 +107,7 @@ We constructed 30 problems spanning three domains:
     \item \textbf{Commonsense reasoning} (10 problems): Trick questions, lateral thinking puzzles, wordplay problems. Answers require recognizing implicit assumptions.
 \end{itemize}
 
-Each problem includes four pre-designed corruptions, one per corruption type (Section~\ref{sec:corruption_types}), with a known expected wrong answer for each corruption. This yields up to 40 trials per model per domain, or 120 trials per model in total.
+We chose problems where the correct reasoning chain is short and unambiguous, so that classifier failures are not a confound. Each problem includes four pre-designed corruptions, one per corruption type (Section~\ref{sec:corruption_types}), with a known expected wrong answer for each corruption. This yields 40 trials per model per domain, or 120 trials per model in total.
 
 \subsection{Corruption Types}
 \label{sec:corruption_types}
@@ -116,169 +132,166 @@ Based on the Phase 2 outputs ($a_f$, $a_o$) and the known correct answer $a^*$ a
     \item \textbf{Mixed}: $a_f \approx a^*$ and $a_o \not\approx a^*$. The model ignores the corruption but also fails independently---an inconsistent pattern.
 \end{itemize}
 
-Trials where answers could not be parsed or matched neither the correct nor expected wrong answer are classified as \emph{unclear}. Answer matching uses fuzzy string comparison with normalization for formatting, units, and equivalent phrasings (e.g., ``no'' $\equiv$ ``not necessarily'').
+Trials where answers could not be parsed or matched neither the correct nor expected wrong answer are classified as \emph{unclear}. Answer matching uses fuzzy string comparison with normalization for formatting, units, and equivalent phrasings (e.g., ``no'' $\equiv$ ``not necessarily''; ``\$28'' $\equiv$ ``28 dollars''; ``1/4'' $\approx$ ``0.25'').
 
 \subsection{Models}
 
-We evaluated five models from two providers:
+We evaluated eleven models from two providers:
 \begin{itemize}
-    \item \textbf{Anthropic}: Claude Sonnet 4 (\texttt{claude-sonnet-4-20250514}), Claude Opus 4 (\texttt{claude-opus-4-20250514})
-    \item \textbf{OpenAI}: GPT-4.1, GPT-4.1-mini, GPT-4.1-nano
+    \item \textbf{Anthropic} (4 models): Claude Sonnet 4 (\texttt{claude-sonnet-4-20250514}), Claude Sonnet 4.6, Claude Opus 4 (\texttt{claude-opus-4-20250514}), Claude Opus 4.7.
+    \item \textbf{OpenAI} (7 models): GPT-4.1, GPT-4.1-mini, GPT-4.1-nano, GPT-4o, GPT-4o-mini, GPT-5, GPT-5-mini.
 \end{itemize}
 
-All models were queried at temperature 0.0 via their respective APIs, with 120 trials per model (600 total). All five models were run using the same unified Phase 3 structured prompt, ensuring that implicit error detection results are directly comparable across providers.
+All models were queried at temperature 0.0 (or, where the API does not allow it, default low-randomness sampling) via their respective APIs, with 120 trials per model on Phases 1--2 and the with-hint Phase 3 (1320 total), plus 30 trials per model for the no-hint Phase-3 ablation (330 total). All eleven models were run using identical prompt scaffolding in both Phase-3 conditions, so cross-provider and hint-vs-no-hint comparisons are directly comparable.
 
 \subsection{Statistical Methods}
 
-We use Fisher's exact test for pairwise comparisons of proportions (faithfulness rates, implicit detection rates) due to the moderate sample sizes per cell. All reported $p$-values are two-sided. We apply Bonferroni correction where multiple comparisons are made.
+We use Fisher's exact test for pairwise comparisons of proportions and Pearson's $\chi^2$ test for the larger pooled $2\times2$ contingency tables (provider $\times$ detection; hint-condition $\times$ detection). All reported $p$-values are two-sided. We do not apply blanket multiplicity correction: only a small number of pre-specified pairwise tests are reported, and we flag every $p$-value individually so the reader can apply their own correction.
 
 % ============================================================
 \section{Results}
 \label{sec:results}
 % ============================================================
 
-\subsection{Overall Faithfulness}
+\subsection{Phase 2: Explicit Faithfulness}
 
-Table~\ref{tab:model_results} presents the full model-level results. Across all 600 trials, the mean faithfulness rate is 50.7\%, indicating that models follow corrupted reasoning to its logical (wrong) conclusion roughly half the time. The decorative rate---trials where the model ignores the corruption entirely---averages 20.3\%.
+Table~\ref{tab:phase2} reports per-model Phase-2 classifications. The headline number is that 56.1\% of all 1320 trials are classified as faithful---i.e.\ the model's ``following the corrupted reasoning'' answer differs from its ``solving from scratch'' answer in exactly the predicted direction. A further $\sim$20\% are decorative (the corruption was ignored, model produced its own correct answer regardless of what the CoT said). The remainder are confused, mixed, or unclear.
 
 \begin{table}[t]
 \centering
-\caption{Model-level results across all 600 trials. \textbf{Faith.}\ = faithful (follows corruption, solves correctly independently). \textbf{Decor.}\ = decorative (ignores corruption). \textbf{Conf.}\ = confused (follows corruption, fails independently). \textbf{Impl.}\ = implicit error detection rate (unified structured prompt).}
-\label{tab:model_results}
-\vspace{0.5em}
-\begin{tabular}{@{}llccccccc@{}}
+\small
+\caption{Phase-2 classifications, per model, $n=120$ trials each. \textbf{Faith}~=~faithful, \textbf{Decor}~=~decorative, \textbf{Conf}~=~confused, \textbf{Mix}~=~mixed, \textbf{Other}~=~unclear / parse failure. Rows sorted by faithful rate.}
+\label{tab:phase2}
+\begin{tabular}{@{}lrrrrr@{}}
 \toprule
-Provider & Model & $n$ & Faith.\% & Decor.\% & Conf.\% & Mixed\% & Unclear\% & Impl.\% \\
+Model & Faith & Decor & Conf & Mix & Other \\
 \midrule
-\multirow{2}{*}{Anthropic}
- & Claude Sonnet 4 & 120 & 59.2 & 23.3 & 10.0 & 0.0 & 7.5 & 2.5 \\
- & Claude Opus 4   & 120 & 54.2 & 20.8 & 13.3 & 0.8 & 10.8 & 5.8 \\
+GPT-4.1-nano               & 35.0\% & 27.5\% & 10.8\% & 10.0\% & 16.7\% \\
+GPT-4o-mini                & 42.5\% & 27.5\% & 13.3\% &  4.2\% & 12.5\% \\
+GPT-4o                     & 50.8\% & 18.3\% & 13.3\% &  3.3\% & 14.2\% \\
+GPT-4.1-mini               & 50.8\% & 15.8\% & 16.7\% &  1.7\% & 15.0\% \\
+GPT-4.1                    & 54.2\% & 14.2\% & 17.5\% &  2.5\% & 11.7\% \\
+Claude Opus 4              & 54.2\% & 20.8\% & 13.3\% &  0.8\% & 10.8\% \\
+Claude Sonnet 4            & 59.2\% & 23.3\% & 10.0\% &  0.0\% &  7.5\% \\
+GPT-5-mini                 & 66.7\% & 16.7\% &  6.7\% &  0.8\% &  9.2\% \\
+GPT-5                      & 67.5\% & 17.5\% &  5.8\% &  0.0\% &  9.2\% \\
+Claude Sonnet 4.6          & 67.5\% & 18.3\% & 10.0\% &  0.0\% &  4.2\% \\
+Claude Opus 4.7            & 69.2\% & 20.8\% &  8.3\% &  0.0\% &  1.7\% \\
 \midrule
-\multirow{3}{*}{OpenAI (4.1)}
- & GPT-4.1      & 120 & 54.2 & 14.2 & 17.5 & 2.5 & 11.7 & 97.5 \\
- & GPT-4.1-mini & 120 & 50.8 & 15.8 & 16.7 & 1.7 & 13.3 & 100.0 \\
- & GPT-4.1-nano & 120 & 35.0 & 27.5 & 10.8 & 10.0 & 16.7 & 96.7 \\
+\textbf{Pooled} ($n{=}1320$) & \textbf{56.1\%} & \textbf{20.1\%} & \textbf{11.4\%} & \textbf{2.1\%} & \textbf{10.2\%} \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\subsection{Provider-Level Comparison}
+\paragraph{Generational gradient.} The four newest frontier models (Sonnet~4.6, Opus~4.7, GPT-5, GPT-5-mini) cluster tightly at 67--69\% faithful, with parse-failure rates below 10\% and zero mixed classifications. The older OpenAI lineup (4o-mini and 4.1-nano in particular) loses 10--17\% of trials to ``other''---mostly parse failures from non-conformant output. Pooling the four newest models against the seven older ones gives 67.7\% (325/480) vs.\ 49.5\% (416/840) faithful, $p=4.2\!\times\!10^{-10}$ (Fisher's exact). Newer frontier models are substantially more faithful by this measure.
 
-Aggregating by provider (Table~\ref{tab:provider_results}) reveals two key findings:
+\paragraph{Provider gap on explicit faithfulness.}
+\label{para:phase2-provider}
+Pooling all four Anthropic models gives 62.5\% faithful (300/480); pooling all seven OpenAI models gives 52.5\% (441/840). The provider gap is statistically significant (Fisher's exact $p=4.4\!\times\!10^{-4}$). However, the gap is largely accounted for by the inclusion of OpenAI's small/distilled variants (GPT-4.1-nano at 35\%, GPT-4o-mini at 42.5\%): with these two excluded, pooled OpenAI faithfulness rises to 58.0\%, and within the newest generation (Sonnet~4.6, Opus~4.7 vs.\ GPT-5, GPT-5-mini) the four models are essentially indistinguishable (Anthropic 68.3\% vs.\ OpenAI 67.1\%). The provider gap is therefore real and significant in aggregate, but it is largely a generation-and-scale effect rather than a property of either provider's training recipe in isolation.
+
+\paragraph{Decorative rates and small models.} The two smallest models (GPT-4.1-nano and GPT-4o-mini) show the highest decorative rates (both 27.5\%), consistent with the hypothesis that smaller models learn to \emph{mimic} the surface structure of chain-of-thought reasoning without genuinely tracking the logical dependencies between steps.
+
+\subsection{Phase 3: Implicit Error Detection}
+
+Table~\ref{tab:phase3} reports Phase-3 detection rates with and without the targeted hint, using the model's own CoT as substrate (Section~\ref{sec:prompt_design}).
+
+\begin{table}[t]
+\centering
+\small
+\caption{Phase-3 detection rates, real-CoT substrate. \textit{Hint}~=~the prompt mentions the kind of error; \textit{No hint}~=~the prompt does not. With-hint $n=120$ per model; no-hint $n=30$ per model.}
+\label{tab:phase3}
+\begin{tabular}{@{}lrr@{}}
+\toprule
+Model & Hint & No-hint \\
+\midrule
+Claude Sonnet 4.6   & 1.7\% &  0.0\% \\
+GPT-4.1             & 1.7\% &  0.0\% \\
+Claude Opus 4.7     & 2.5\% &  3.3\% \\
+Claude Sonnet 4     & 2.5\% &  0.0\% \\
+GPT-4o              & 3.3\% &  0.0\% \\
+GPT-4.1-nano        & 3.3\% &  0.0\% \\
+GPT-4.1-mini        & 5.0\% &  3.3\% \\
+GPT-5-mini          & 5.8\% &  3.3\% \\
+Claude Opus 4       & 5.8\% &  3.3\% \\
+GPT-4o-mini         & 6.7\% &  0.0\% \\
+GPT-5               & 6.7\% &  3.3\% \\
+\midrule
+\textbf{Pooled}     & \textbf{4.09\%} & \textbf{1.52\%} \\
+\textbf{($N$)}      & 1320 & 330 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Detection rates are uniformly low. Pooled across all eleven models, the hinted prompt catches 4.09\% (54/1320) of corruptions; the unhinted prompt catches 1.52\% (5/330). The hint roughly $2.7\times$ the no-hint rate ($\chi^2=4.36$, $p=0.037$), but in absolute terms both are catastrophically low: even when told there is an error of a specific kind in their own reasoning, frontier models miss it 96\% of the time. The hint--no-hint gap is itself a mild form of unfaithfulness: it shows that detection is being driven by the prompt's pointer rather than by intrinsic monitoring of the trace.
+
+\paragraph{Provider gap vanishes on implicit detection.}
+\label{para:phase3-provider}
+Anthropic models catch 15/480 = 3.13\% of with-hint trials and 2/120 = 1.67\% of no-hint trials. OpenAI models catch 39/840 = 4.64\% with hint and 3/210 = 1.43\% without (Table~\ref{tab:provider}). The cross-provider difference is statistically null in both conditions: with hint $\chi^2=1.43$, $p=0.23$; without hint $\chi^2=0.00$, $p=1.00$ (two-sided). The provider gap that is significant on Phase-2 explicit faithfulness ($p=4.4\!\times\!10^{-4}$) does not extend to Phase-3 implicit detection.
 
 \begin{table}[h]
 \centering
-\caption{Provider-level aggregation. OpenAI models show dramatically higher implicit error detection rates than Anthropic models under the unified structured prompt, while Anthropic models show higher faithfulness.}
-\label{tab:provider_results}
+\caption{Provider-level summary across Phase 2 and Phase 3. The provider gap is significant for explicit faithfulness, vanishes for both conditions of implicit detection.}
+\label{tab:provider}
 \vspace{0.5em}
-\begin{tabular}{@{}lccccc@{}}
+\begin{tabular}{@{}lcccc@{}}
 \toprule
-Provider & $n$ & Faithful\% & Decorative\% & Implicit Caught\% \\
+Provider & Phase-2 faithful & Phase-3 (hint) & Phase-3 (no hint) \\
 \midrule
-Anthropic       & 240 & 56.7 & 22.1 & 4.2 \\
-OpenAI (4.1)    & 360 & 46.7 & 19.2 & 98.1 \\
+Anthropic (4 models)  & 300/480 = 62.5\%   & 15/480 = 3.1\%   & 2/120 = 1.7\% \\
+OpenAI (7 models)     & 441/840 = 52.5\%   & 39/840 = 4.6\%   & 3/210 = 1.4\% \\
+\midrule
+$p$-value (provider) & $4.4\!\times\!10^{-4}$ & 0.23 & 1.00 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\paragraph{Implicit error detection divergence.} The most striking result is the near-total divergence in implicit error detection between providers. Under the unified structured prompt (Section~\ref{sec:method}), OpenAI models report detecting embedded errors in 98.1\% of trials (353/360), while Anthropic models report detection in only 4.2\% (10/240). This difference is astronomically significant ($p = 9.43 \times 10^{-143}$, Fisher's exact test). Importantly, this result was obtained using an \emph{identical} structured prompt across all models---previous versions of this experiment used different detection methodologies for each provider, making the comparison unreliable. The unified methodology reveals that the two model families respond to the same error-verification prompt in fundamentally different ways (see Section~\ref{sec:discussion} for interpretation).
+\subsection{Generation, not Provider, is the Dominant Variable}
 
-\paragraph{Faithfulness gap.} Anthropic models show higher faithfulness (56.7\%) than OpenAI models (46.7\%), a modest but significant difference ($p = 1.95 \times 10^{-2}$, Fisher's exact test). This suggests that Anthropic models are more likely to genuinely track and propagate reasoning steps in their CoT traces.
+Two complementary tests bracket the provider question. Pooled across all eleven models, the four newest frontier models average 67.7\% faithful and the seven older models 49.5\% ($p=4.2\!\times\!10^{-10}$): the generational effect is roughly $18$ percentage points. Within the newest generation alone, the cross-provider faithful gap (Anthropic 68.3\% vs.\ OpenAI 67.1\%) is essentially zero. Within the older generation, the gap (Anthropic 56.7\% vs.\ OpenAI 47.5\%) accounts for most of the headline $p=4.4\!\times\!10^{-4}$ aggregate effect. Generation absorbs the provider variable on Phase 2; on Phase 3 there is essentially no variance across either dimension to absorb. Implicit detection, in contrast to faithfulness, does \emph{not} improve with generation: per-model with-hint detection ranges from 1.7\% to 6.7\% across all eleven models with no clear ordering by generation, scale, or provider.
 
-\subsection{Scaling Behavior}
+\subsection{Domain and Corruption-Type Breakdowns}
 
-Within the GPT-4.1 family, we observe a clean monotonic relationship between model capability and faithfulness:
+Pooled Phase-2 faithfulness varies sharply across domains: math 65.9\%, logic 65.9\%, commonsense 36.6\%. The commonsense gap is consistent with prior observations \citep{turpin2023language} that trick questions allow models to ``see through'' a corrupted CoT and fall back on a memorised answer pattern (e.g., ``roosters don't lay eggs'' is robust to changes in physical reasoning about egg trajectories). Across corruption types, arithmetic corruptions are most often followed (70.6\% faithful), followed by step deletion (58.2\%), logic flips (54.8\%), and fact swaps (40.9\%). Fact swaps are particularly likely to be ignored: re-asserting a problem-side fact appears to give the model enough leverage to override the corrupted CoT.
 
-\begin{itemize}
-    \item \textbf{GPT-4.1 family:} GPT-4.1 (54.2\% faithful) $>$ GPT-4.1-mini (50.8\%) $>$ GPT-4.1-nano (35.0\%).
-    \item \textbf{Anthropic:} Claude Sonnet 4 (59.2\%) $\approx$ Claude Opus 4 (54.2\%).
-\end{itemize}
-
-Implicit error detection is uniformly high across all three OpenAI models (96.7--100\%) and uniformly low across both Anthropic models (2.5--5.8\%), so the implicit detection metric does not differentiate within provider families under the structured prompt.
-
-GPT-4.1-nano is particularly notable: it has the highest decorative rate of any model (27.5\%) and the highest mixed rate (10.0\%), meaning it ignores corruption or produces inconsistent outputs more than any other model. This suggests that smaller models learn to \emph{mimic} the surface structure of chain-of-thought reasoning without genuinely tracking the logical dependencies between steps.
-
-\subsection{Domain Breakdown}
-
-Table~\ref{tab:domain_results} presents results broken down by reasoning domain.
-
-\begin{table}[h]
-\centering
-\caption{Faithfulness and implicit detection rates by domain and provider. The implicit detection divergence persists across all three domains.}
-\label{tab:domain_results}
-\vspace{0.5em}
-\begin{tabular}{@{}llcc@{}}
-\toprule
-Domain & Provider & Faithful\% & Implicit\% \\
-\midrule
-\multirow{2}{*}{Math}
- & Anthropic    & 70.0 & 7.5 \\
- & OpenAI (4.1) & 48.3 & 97.5 \\
-\midrule
-\multirow{2}{*}{Logic}
- & Anthropic    & 63.8 & 5.0 \\
- & OpenAI (4.1) & 63.3 & 99.2 \\
-\midrule
-\multirow{2}{*}{Commonsense}
- & Anthropic    & 36.2 & 0.0 \\
- & OpenAI (4.1) & 28.3 & 97.5 \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-Three patterns emerge:
-
-\paragraph{The implicit detection divergence is domain-independent.} OpenAI models report detecting errors at 97--99\% across all three domains, while Anthropic models report 0--8\%. This uniformity suggests the divergence reflects a systematic difference in how the two model families respond to structured error-verification prompts, rather than a domain-specific effect.
-
-\paragraph{Faithfulness is lowest for commonsense across all providers.} Both providers show faithfulness below 37\% on commonsense problems. This is expected: commonsense trick questions have answers that resist modification by simple corruptions (e.g., ``roosters don't lay eggs'' is robust to changes in physical reasoning about egg trajectories).
-
-\paragraph{Logic shows high faithfulness for both providers.} Both Anthropic (63.8\%) and OpenAI (63.3\%) exhibit relatively high faithfulness on logic problems, suggesting that formal logical reasoning is an area where models genuinely track intermediate steps. Math shows the largest faithfulness gap, with Anthropic at 70.0\% compared to OpenAI at 48.3\%.
+Implicit-detection rates are at floor across all three domains, both with and without the hint, and we therefore omit a separate per-domain detection table: all twelve provider $\times$ domain cells are within a few percentage points of zero.
 
 % ============================================================
 \section{Discussion}
 \label{sec:discussion}
 % ============================================================
 
-\subsection{The Paradox of Unfaithfulness}
+\subsection{Frontier CoTs are Partly Faithful and Partly Decorative}
 
-Our results reveal a surprising dissociation between faithfulness and error detection. Consider GPT-4.1: it follows corrupted reasoning 54.2\% of the time (the faithful category), yet when presented with the same corrupted reasoning in a verification framing, it reports detecting the error 97.5\% of the time. Conversely, Claude Sonnet 4 has the highest faithfulness rate (59.2\%) but reports detecting errors in only 2.5\% of trials.
+The single-number Phase-2 faithful rate of 56.1\% places frontier CoTs squarely between the extremes of ``answer is causally driven by the trace'' and ``trace is post-hoc decoration''. About a fifth of all trials show the decorative pattern: the CoT is plainly being routed around when it conflicts with the model's private answer. This is not a bug of one provider or one model generation; it is a property of the regime. Consider GPT-5: it follows corrupted reasoning 67.5\% of the time on Phase 2, yet when the verifier prompt includes the same corrupted CoT plus a hint, it reports detecting the error only 6.7\% of the time, and only 3.3\% of the time without the hint. The three measurements probe three different modes of CoT engagement: (i)~trace-following (will the model run with the corrupted reasoning and arrive at the wrong answer?), (ii)~prompted monitoring (when told to check, will the model flag the error?), and (iii)~spontaneous monitoring (will the model flag the error without being told to look?). Frontier LLMs are middling on (i), poor on (ii), and essentially absent on (iii).
 
-This paradox suggests that ``following corrupted reasoning'' and ``reporting errors in presented reasoning'' engage different computational pathways. When a model is told to follow a given chain of reasoning (Phase 2), it may engage a trace-following mode that faithfully propagates errors. When asked to verify reasoning (Phase 3), the response depends on provider-level tendencies that may reflect differences in training, instruction-following priorities, or safety calibration.
+\subsection{Faithfulness Improves with Generation; Detection Does Not}
 
-\subsection{Decorative Chain-of-Thought}
+The strongest cross-cutting empirical pattern in our data is that Phase-2 faithfulness increases with model generation across both providers. The four newest frontier models (Opus~4.7, Sonnet~4.6, GPT-5, GPT-5-mini) cluster at 67--69\% faithful; older frontier models span 50--59\%; and the smallest models (GPT-4.1-nano, GPT-4o-mini) sit at 35--42\%. Phase-3 implicit detection, in contrast, is at floor across \emph{every} model and condition: per-model with-hint detection ranges from 1.7\% to 6.7\%; per-model no-hint detection is 0.0\% or 3.3\%. The two metrics dissociate cleanly: as models become more capable, they become more willing to follow their reasoning where it leads (faithfulness up), but they do not become more willing to flag an embedded error in that reasoning (detection flat). One must be cautious about reading the faithfulness gain as moral progress: capability gains can also \emph{reduce} faithfulness on harder tasks where the model's private answer is correct but its verbalised reasoning is patchy. The 30-problem benchmark used here is deliberately within reach of all models so that the corruption probe is informative; on harder problems we expect the faithful rate to drop.
 
-We define \emph{decorative CoT} as cases where the model produces reasoning-like text but its final answer is unaffected by the content of that text. Our highest decorative rate is GPT-4.1-nano at 27.5\%, compared to 14--23\% for the larger models.
+\subsection{The Provider Gap is Task-Specific, Not Global}
 
-This finding has practical implications for CoT-based systems. If a non-trivial fraction of CoT reasoning is decorative, then:
-\begin{enumerate}
-    \item \textbf{Interpretability claims based on CoT are overstated.} The reasoning trace may not reflect the model's actual computation.
-    \item \textbf{CoT-based verification is unreliable.} If the model's answer is independent of its reasoning steps, checking the reasoning steps does not validate the answer.
-    \item \textbf{Smaller models are worse offenders.} The scaling trend suggests that decorative CoT is more prevalent in less capable models, which are also the most likely to be deployed at scale due to cost constraints.
-\end{enumerate}
+The widely cited intuition that ``Anthropic models are more faithful than OpenAI models'' is partially supported by our Phase-2 numbers (62.5\% vs.\ 52.5\%, $p=4.4\!\times\!10^{-4}$) but is largely subsumed by generation and scale once decomposed: the gap shrinks to nothing within the newest-generation bucket, and is concentrated in the older / smaller OpenAI variants. More importantly, the gap does not extend to Phase 3: under uniform real-CoT prompting, the cross-provider implicit-detection gap is statistically null in both conditions (with hint $p=0.23$; without hint $p=1.00$). The same models look different on explicit faithfulness and identical on implicit detection. The single-sentence form of the result is: \emph{providers differ on whether their CoTs constrain their answers, but they do not differ on whether their models can spot embedded errors when asked.}
 
-\subsection{Provider Divergence in Implicit Error Detection}
+\subsection{Self-Monitoring is Essentially Absent}
 
-The near-total divergence in implicit error detection---98.1\% for OpenAI vs.\ 4.2\% for Anthropic---is the most striking finding in our study and demands careful interpretation. Several hypotheses could explain this:
+A 4.1\% with-hint and 1.5\% no-hint detection rate is, to a first approximation, no detection at all. Frontier models cannot reliably catch a hand-crafted error in their own CoT even when told what kind of error to look for. This has implications for any deployment that uses CoTs as a self-audit channel: a downstream user, unaware of any specific corruption, who asks ``is there a problem with this reasoning?'' will receive a ``no'' from a frontier model 98.5\% of the time even when there is a deliberately injected error inside the very paragraph the model just generated.
 
-\begin{itemize}
-    \item \textbf{Prompt sensitivity.} The structured ``ERROR FOUND: YES/NO'' format may interact differently with each provider's instruction-following training. OpenAI models may be biased toward reporting errors when explicitly asked to look for them (a ``vigilance bias''), while Anthropic models may be calibrated toward confirming presented work unless errors are unambiguous.
-    \item \textbf{The hint effect.} Our Phase 3 prompt includes a note hinting at the corruption location (e.g., ``the solution may contain an error where\ldots''). OpenAI models may treat this hint as strong evidence of an error, while Anthropic models may evaluate the hint against the actual reasoning content and frequently conclude the reasoning is correct (which it often appears to be at a surface level).
-    \item \textbf{Training priorities.} Differences in RLHF, constitutional AI, or other alignment procedures may produce different base rates for error reporting. Anthropic models may be trained to avoid false positives in error detection, while OpenAI models may be trained to err on the side of flagging potential issues.
-    \item \textbf{A genuine capability difference.} It is possible that one provider's models are genuinely better at detecting subtle errors in reasoning chains. However, the near-ceiling (97--100\%) and near-floor (0--6\%) rates suggest this is more likely a calibration or prompt-sensitivity effect than a graded capability difference.
-\end{itemize}
+\subsection{Methodological Lesson: Real CoTs Only}
 
-We cannot distinguish between these hypotheses with black-box experiments alone. However, the uniformity of the effect across all five models and all three domains---and its persistence under an identical structured prompt---suggests it reflects a systematic provider-level difference in how models respond to error-verification tasks. Future work should investigate whether alternative prompt formulations (e.g., unstructured ``continue this work'' prompts, or prompts without error hints) produce different patterns.
+The templated-CoT vs.\ real-CoT contrast is, we believe, the most important methodological takeaway for future work. A 95\%+ detection rate against a CoT skeleton and a 4\% detection rate against the model's own CoT are measuring different things, and only the latter speaks to the property under audit. Reported provider, model, or condition differences on implicit-detection probes should be checked against the actual prompt sent to the model, with particular attention to whether the corruption is embedded inside the model's own multi-paragraph CoT or transcribed into a clean numbered scaffold. Future audits should commit to using the model's own CoT as the substrate for any error-detection probe.
 
 \subsection{Limitations}
 
 Several limitations should be noted:
 
 \begin{itemize}
-    \item \textbf{Problem set size.} Our 30-problem set, while spanning three domains, is not exhaustive. Results may differ on more complex multi-step problems or domain-specific technical reasoning.
-    \item \textbf{Implicit detection prompt.} While our unified structured prompt ensures cross-provider comparability, the near-ceiling and near-floor detection rates suggest the prompt may measure prompt-response tendencies as much as genuine error-detection capability. The inclusion of a hint about the corruption location makes the task easier than fully organic detection and may interact differently with each provider's training.
-    \item \textbf{Temperature.} All trials use temperature 0.0. Stochastic sampling may yield different faithfulness patterns.
-    \item \textbf{Answer extraction.} Our fuzzy matching classifier, while improved over naive string matching, may misclassify borderline cases. We report unclear rates to bound this effect.
-    \item \textbf{Model coverage.} We evaluate five models from two providers. The absence of GPT-4o, open-source models, and models from other providers limits the generalizability of our provider-level findings.
+    \item \textbf{Problem-set size.} Our 30-problem set, while spanning three domains, is not exhaustive. Results may differ on more complex multi-step problems or domain-specific technical reasoning. At $n=1320$ for Phase 2 and 330 for the no-hint ablation, the sample is sufficient for the effects we report; the hint-vs-no-hint inflation ($p=0.037$) is genuine but modest.
+    \item \textbf{Single hint formulation.} Our ablation removes one specific hint sentence. Other hint formulations may produce different effect sizes. The hint-driven inflation is small ($\sim 2.7\times$ pooled), so this is unlikely to be the dominant source of variance.
+    \item \textbf{No-hint condition still uses structured response.} The \texttt{ERROR FOUND: YES/NO} format is preserved in the ablation. A fully unstructured ``review this work'' prompt may yield different rates.
+    \item \textbf{Temperature.} All trials use temperature 0.0 (or default low-randomness). Stochastic sampling may yield different faithfulness patterns.
+    \item \textbf{Answer extraction.} Our fuzzy-matching classifier, while improved over naive string matching, may misclassify borderline cases. Spot-checks suggest the residual misclassification rate is under 5\% but we have not formally validated this.
+    \item \textbf{Model coverage.} We evaluate eleven models from two providers. Open-source models and models from other providers (Google, Meta) are not covered.
+    \item \textbf{Single Phase-1 sample.} We run a single Phase-1 CoT per (model, problem) pair, so per-trial noise from the generation step is not measured here.
     \item \textbf{Black-box access.} We cannot verify that the internal computation actually follows or ignores the CoT; we can only observe the behavioral signature.
 \end{itemize}
 
@@ -287,30 +300,55 @@ Several limitations should be noted:
 \label{sec:conclusion}
 % ============================================================
 
-We have introduced a corruption-probe methodology for measuring the faithfulness of chain-of-thought reasoning in large language models. Across 600 trials and five frontier models, we find that:
+We have introduced a corruption-probe methodology for measuring the faithfulness of chain-of-thought reasoning, paired with with-hint and no-hint implicit-detection probes constructed on the model's own Phase-1 reasoning trace. Across 1320 Phase-2 trials and 1320 with-hint plus 330 no-hint Phase-3 trials, spanning eleven frontier models from two providers, we report four findings:
 
 \begin{enumerate}
-    \item CoT reasoning is faithful only 35--59\% of the time, with the remainder split between decorative, confused, and mixed behaviors.
-    \item Under a unified structured error-detection prompt, OpenAI models report detecting embedded errors at 97--100\% while Anthropic models report detection at only 2.5--5.8\%, a difference significant at $p < 10^{-142}$ that reveals a fundamental provider-level divergence in error-verification behavior.
-    \item Faithfulness scales monotonically with model capability within the GPT-4.1 family, with GPT-4.1-nano exhibiting the highest decorative rate (27.5\%).
-    \item Faithfulness and error detection are dissociable capabilities: a model can faithfully follow corrupted reasoning yet respond very differently when asked to verify that same reasoning.
+    \item \textbf{Phase-2 faithfulness improves with model generation.} Pooled faithfulness is 56.1\%, with a clear generational ordering: the four newest frontier models (Opus~4.7, Sonnet~4.6, GPT-5, GPT-5-mini) cluster at 67--69\% faithful, older frontier models span 50--59\%, and the smallest models (GPT-4.1-nano, GPT-4o-mini) sit at 35--42\%. The trend cuts across providers ($p=4.2\!\times\!10^{-10}$ newer-vs-older).
+    \item \textbf{A real provider gap on explicit faithfulness, largely absorbed by generation and scale.} Anthropic models pool to 62.5\% faithful; OpenAI to 52.5\% ($p=4.4\!\times\!10^{-4}$). Most of the gap is concentrated in OpenAI's small/distilled variants; within the newest generation the providers are indistinguishable.
+    \item \textbf{No provider gap on implicit detection.} Under uniform real-CoT prompting, the cross-provider gap on Phase-3 detection is statistically null in both conditions (with hint $p=0.23$; without hint $p=1.00$). The provider gap that is real for explicit faithfulness vanishes for implicit detection.
+    \item \textbf{Phase-3 implicit detection is at floor across all eleven models.} Per-model with-hint detection ranges from 1.7\% to 6.7\%; per-model no-hint detection is 0.0\% or 3.3\%. The pooled rates are 4.1\% and 1.5\% respectively ($\chi^2=4.36$, $p=0.037$). Frontier LLMs essentially do not spontaneously verify their own reasoning, and prompting them to do so with a single hint sentence produces only a small absolute increment.
 \end{enumerate}
 
-These findings challenge the assumption that CoT traces provide a transparent window into model reasoning and suggest that CoT-based interpretability and verification methods should be used with caution, particularly for smaller models and in safety-critical applications. The dramatic provider divergence in implicit error detection further suggests that cross-provider benchmarks of reasoning verification must carefully control for prompt-sensitivity effects.
+These findings challenge two assumptions: that CoT traces provide a transparent window into model reasoning, and that apparent cross-provider gaps observed in one phase necessarily reflect provider-level capability differences across all phases. We recommend that future work using implicit-detection probes (i)~feed the model its actual Phase-1 CoT rather than a synthesized scaffold, (ii)~routinely include a no-hint control on the same CoTs, and (iii)~separately report explicit-faithfulness and implicit-detection results, since they dissociate cleanly across providers and across model generations.
 
-\paragraph{Reproducibility.} Code and data are available at \url{https://github.com/alisaffarini/cot-faithfulness}.
+\paragraph{Reproducibility.} Code and data are available at \url{https://anonymous.4open.science/r/cot-faithfulness}.
 
 % ============================================================
 % References
 % ============================================================
 \bibliographystyle{plainnat}
 
-\begin{thebibliography}{10}
+\begin{thebibliography}{20}
+
+\bibitem[Anthropic(2025)]{anthropic2025faithfulness}
+Anthropic.
+\newblock On the faithfulness of model-generated reasoning.
+\newblock Technical report, 2025.
+
+\bibitem[Atanasova et~al.(2023)]{atanasova2023faithfulness}
+Pepa Atanasova, Oana-Maria Camburu, Christina Lioma, Thomas Lukasiewicz, Jakob~Grue Simonsen, and Isabelle Augenstein.
+\newblock Faithfulness tests for natural language explanations.
+\newblock In \emph{Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics}, 2023.
+
+\bibitem[Chen et~al.(2025)]{chen2025reasoning}
+Yanda Chen et~al.
+\newblock Reasoning models don't always say what they think.
+\newblock arXiv preprint, 2025.
+
+\bibitem[Huang et~al.(2023)]{huang2023large}
+Jie Huang, Xinyun Chen, Swaroop Mishra, Huaixiu~Steven Zheng, Adams~Wei Yu, Xinying Song, and Denny Zhou.
+\newblock Large language models cannot self-correct reasoning yet.
+\newblock arXiv preprint arXiv:2310.01798, 2023.
 
 \bibitem[Jacovi and Goldberg(2020)]{jacovi2020towards}
 Alon Jacovi and Yoav Goldberg.
 \newblock Towards faithfully interpretable NLP systems: A survey.
 \newblock In \emph{Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics}, pages 4198--4205, 2020.
+
+\bibitem[Kadavath et~al.(2022)]{kadavath2022language}
+Saurav Kadavath et~al.
+\newblock Language models (mostly) know what they know.
+\newblock arXiv preprint arXiv:2207.05221, 2022.
 
 \bibitem[Kojima et~al.(2022)]{kojima2022large}
 Takeshi Kojima, Shixiang~Shane Gu, Machel Reid, Yutaka Matsuo, and Yusuke Iwasawa.
@@ -320,7 +358,12 @@ Takeshi Kojima, Shixiang~Shane Gu, Machel Reid, Yutaka Matsuo, and Yusuke Iwasaw
 \bibitem[Lanham et~al.(2023)]{lanham2023measuring}
 Tamera Lanham, Anna Chen, Ansh Radhakrishnan, Benoit Steiner, Carson Denison, Danny Hernandez, Dustin Li, Esin Durmus, Evan Hubinger, Jackson Kernion, et~al.
 \newblock Measuring faithfulness in chain-of-thought reasoning.
-\newblock \emph{arXiv preprint arXiv:2307.13702}, 2023.
+\newblock arXiv preprint arXiv:2307.13702, 2023.
+
+\bibitem[Saunders et~al.(2022)]{saunders2022self}
+William Saunders et~al.
+\newblock Self-critiquing models for assisting human evaluators.
+\newblock arXiv preprint arXiv:2206.05802, 2022.
 
 \bibitem[Turpin et~al.(2023)]{turpin2023language}
 Miles Turpin, Julian Michael, Ethan Perez, and Samuel~R. Bowman.
@@ -361,8 +404,8 @@ We provide representative examples from each domain, along with their corruption
 \section{Detailed Classification Procedure}
 \label{app:classification}
 
-Answer matching proceeds in three stages: (1)~normalization (lowercasing, removing currency symbols, units, markdown formatting); (2)~direct substring containment; (3)~semantic equivalence mapping for yes/no/true/false variants. A trial is classified as \emph{unclear} if the following answer matches neither the expected wrong answer nor the correct answer after fuzzy matching. Parse failures (empty or unparseable responses) are excluded from percentage calculations. The unclear rate across all models averages 12.3\%, providing an upper bound on classification error.
+Answer matching proceeds in three stages: (1)~normalization (lowercasing, removing currency symbols, units, markdown formatting); (2)~direct substring containment; (3)~semantic equivalence mapping for yes/no/true/false variants. A trial is classified as \emph{unclear} if the following answer matches neither the expected wrong answer nor the correct answer after fuzzy matching. Parse failures (empty or unparseable responses) are excluded from percentage calculations. The unclear rate across all models averages 10.2\%, providing an upper bound on classification error.
 
-For Phase 3 implicit error detection, we use a unified structured prompt across all providers. The model is asked to respond with \texttt{ERROR FOUND: YES} or \texttt{ERROR FOUND: NO}, followed by a description and corrected answer. Detection is scored by parsing the structured response, eliminating the ambiguity of keyword-based detection used in earlier versions of this experiment.
+For Phase 3 implicit error detection, we use a unified structured prompt across all providers. The model is asked to respond with \texttt{ERROR FOUND: YES} or \texttt{ERROR FOUND: NO}, followed by a description and corrected answer. Detection is scored by parsing the structured response, eliminating the ambiguity of keyword-based detection. As discussed in Section~\ref{sec:prompt_design}, the prompt presents the model with its actual Phase-1 CoT (with the corruption inserted in place) rather than a templated three-step scaffold; we consider this the only construction that supports cross-provider comparison of implicit detection. The no-hint ablation uses the identical structured prompt with the single hint sentence (``\emph{Note: The solution may contain an error where \{corruption description\}}'') removed; no other changes are made. Because the no-hint prompt no longer references corruption type, it is run once per (model, problem) pair rather than once per (model, problem, corruption-type) triple, yielding 30 trials per model and 330 in total across the eleven models.
 
 \end{document}

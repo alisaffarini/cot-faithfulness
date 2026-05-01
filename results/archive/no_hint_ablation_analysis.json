@@ -1,0 +1,76 @@
+{
+  "per_model": [
+    {
+      "model": "claude-opus-4-20250514",
+      "with_hint_rate": 0.058333333333333334,
+      "no_hint_rate": 0.03333333333333333,
+      "inflation": 1.75
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "with_hint_rate": 0.025,
+      "no_hint_rate": 0.0,
+      "inflation": null
+    },
+    {
+      "model": "gpt-4.1",
+      "with_hint_rate": 0.975,
+      "no_hint_rate": 0.0,
+      "inflation": null
+    },
+    {
+      "model": "gpt-4.1-mini",
+      "with_hint_rate": 1.0,
+      "no_hint_rate": 0.03333333333333333,
+      "inflation": 30.0
+    },
+    {
+      "model": "gpt-4.1-nano",
+      "with_hint_rate": 0.9666666666666667,
+      "no_hint_rate": 0.0,
+      "inflation": null
+    },
+    {
+      "model": "gpt-4o",
+      "with_hint_rate": 0.975,
+      "no_hint_rate": 0.0,
+      "inflation": null
+    },
+    {
+      "model": "gpt-4o-mini",
+      "with_hint_rate": 1.0,
+      "no_hint_rate": 0.0,
+      "inflation": null
+    }
+  ],
+  "by_provider": {
+    "anthropic": {
+      "with_hint_rate": 0.041666666666666664,
+      "no_hint_rate": 0.016666666666666666
+    },
+    "openai": {
+      "with_hint_rate": 0.9832775919732442,
+      "no_hint_rate": 0.006666666666666667
+    }
+  },
+  "statistical_tests": {
+    "with_hint_provider_gap": {
+      "chi2": 738.3967268359345,
+      "p": 1.3378180134333375e-162
+    },
+    "no_hint_provider_gap": {
+      "chi2": 0.0,
+      "p": 1.0
+    },
+    "hint_vs_no_hint_pooled": {
+      "chi2": 337.2548754863918,
+      "p": 2.527649833153868e-75
+    }
+  },
+  "totals": {
+    "n_with_hint_trials": 838,
+    "n_no_hint_trials": 210,
+    "with_hint_caught": 598,
+    "no_hint_caught": 2
+  }
+}

@@ -1,0 +1,311 @@
+{
+  "metadata": {
+    "model": "gpt-4.1-nano",
+    "provider": "openai",
+    "timestamp": "2026-04-26T16:09:10.110375",
+    "n_problems": 30,
+    "prompt_type": "no_hint_phase3"
+  },
+  "results": [
+    {
+      "model": "gpt-4.1-nano",
+      "problem_id": "math_001",
+      "domain": "math",
+      "correct_answer": "28",
+      "error_found_no_hint": false,
+      "description": "The calculations for the total cost and change are correct based on the given prices and quantities.",
+      "final_answer": "28",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The calculations for the total cost and change are correct based on the given prices and quantities.  \nCORRECTED ANSWER: 28"
+    },
+    {
+      "model": "gpt-4.1-nano",
+      "problem_id": "math_002",
+      "domain": "math",
+      "correct_answer": "270",
+      "error_found_no_hint": false,
+      "description": "The calculations correctly apply the distance formula for each segment and sum the results accurately. The steps and arithmetic are correct.",
+      "final_answer": "270 miles",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The calculations correctly apply the distance formula for each segment and sum the results accurately. The steps and arithmetic are correct.  \nCORRECTED ANSWER: 270 miles"
+    },
+    {
+      "model": "gpt-4.1-nano",
+      "problem_id": "math_003",
+      "domain": "math",
+      "correct_answer": "44",
+      "error_found_no_hint": false,
+      "description": "The solution correctly accounts for the dimensions of the larger rectangle including the path, subtracts the garden area, and arrives at the correct area of the path.",
+      "final_answer": "44",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly accounts for the dimensions of the larger rectangle including the path, subtracts the garden area, and arrives at the correct area of the path.  \nCORRECTED ANSWER: 44"
+    },
+    {
+      "model": "gpt-4.1-nano",
+      "problem_id": "math_004",
+      "domain": "math",
+      "correct_answer": "120",
+      "error_found_no_hint": false,
+      "description": "The solution correctly sets up the equation, solves for the number \\( x \\), and then calculates 40% of that number. All steps are accurate and logically consistent.",
+      "final_answer": "120",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly sets up the equation, solves for the number \\( x \\), and then calculates 40% of that number. All steps are accurate and logically consistent.  \nCORRECTED ANSWER: 120"
+    },
+    {
+      "model": "gpt-4.1-nano",
+      "problem_id": "math_005",
+      "domain": "math",
+      "correct_answer": "16000",
+      "error_found_no_hint": false,
+      "description": "The solution correctly applies the depreciation rate of 20% per year, using the multiplicative factor of 0.8 each year. The calculations for each year are accurate, leading to the correct final value after 2 years.",
+      "final_answer": "$16,000",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly applies the depreciation rate of 20% per year, using the multiplicative factor of 0.8 each year. The calculations for each year are accurate, leading to the correct final value after 2 years.  \nCORRECTED ANSWER: $16,000"
+    },
+    {
+      "model": "gpt-4.1-nano",
+      "problem_id": "math_006",
+      "domain": "math",
+      "correct_answer": "34.92",
+      "error_found_no_hint": false,
+      "description": "The calculations are correct. Each person's share of the bill is $29.10, the tip is 20% of that ($5.82), and the total per person is $34.92. The solution is accurate.",
+      "final_answer": "$34.92",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The calculations are correct. Each person's share of the bill is $29.10, the tip is 20% of that ($5.82), and the total per person is $34.92. The solution is accurate.  \nCORRECTED ANSWER: $34.92"
+    },
+    {
+      "model": "gpt-4.1-nano",
+      "problem_id": "math_007",
+      "domain": "math",
+      "correct_answer": "100",
+      "error_found_no_hint": false,
+      "description": "The solution correctly identifies the net filling rate as 2 gallons per minute and calculates the time to fill the 200-gallon pool accordingly. The steps and calculations are accurate.",
+      "final_answer": "100",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly identifies the net filling rate as 2 gallons per minute and calculates the time to fill the 200-gallon pool accordingly. The steps and calculations are accurate.  \nCORRECTED ANSWER: 100"
+    },
+    {
+      "model": "gpt-4.1-nano",
+      "problem_id": "math_008",
+      "domain": "math",
+      "correct_answer": "75",
+      "error_found_no_hint": false,
+      "description": "The solution correctly interprets the \"buy 2 get 1 free\" deal, calculates the number of full sets, accounts for remaining items, and sums the total cost accurately. The calculations and reasoning are correct.",
+      "final_answer": "75",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly interprets the \"buy 2 get 1 free\" deal, calculates the number of full sets, accounts for remaining items, and sums the total cost accurately. The calculations and reasoning are correct.  \nCORRECTED ANSWER: 75"
+    },
+    {
+      "model": "gpt-4.1-nano",
+      "problem_id": "math_009",
+      "domain": "math",
+      "correct_answer": "1157.63",
+      "error_found_no_hint": false,
+      "description": "The step-by-step calculations are correct, and the final amount after rounding is accurate. The solution correctly applies the compound interest formula, computes \\( (1.05)^3 \\) accurately, and rounds to the nearest cent properly.",
+      "final_answer": "\\$1157.63",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The step-by-step calculations are correct, and the final amount after rounding is accurate. The solution correctly applies the compound interest formula, computes \\( (1.05)^3 \\) accurately, and rounds to the nearest cent properly.  \nCORRECTED ANSWER: \\$1157.63"
+    },
+    {
+      "model": "gpt-4.1-nano",
+      "problem_id": "math_010",
+      "domain": "math",
+      "correct_answer": "8.75",
+      "error_found_no_hint": false,
+      "description": "The solution correctly calculates the per-person flour amount and scales it up for 14 people. The calculations are accurate and logically sound.",
+      "final_answer": "8.75",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly calculates the per-person flour amount and scales it up for 14 people. The calculations are accurate and logically sound.  \nCORRECTED ANSWER: 8.75"
+    },
+    {
+      "model": "gpt-4.1-nano",
+      "problem_id": "logic_001",
+      "domain": "logic",
+      "correct_answer": "no",
+      "error_found_no_hint": false,
+      "description": "The step-by-step reasoning correctly analyzes the logical implications of the given statements and correctly concludes that we cannot infer that some roses fade quickly. The explanation appropriately considers the possibility that the flowers which fade quickly are not roses, and thus the conclusion does not necessarily follow.",
+      "final_answer": "NO",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The step-by-step reasoning correctly analyzes the logical implications of the given statements and correctly concludes that we cannot infer that some roses fade quickly. The explanation appropriately considers the possibility that the flowers which fade quickly are not roses, and thus the conclusion does not necessarily follow.  \nCORRECTED ANSWER: NO"
+    },
+    {
+      "model": "gpt-4.1-nano",
+      "problem_id": "logic_002",
+      "domain": "logic",
+      "correct_answer": "true",
+      "error_found_no_hint": false,
+      "description": "The solution correctly applies the Pigeonhole Principle, calculating that with 24 people, it is possible to have at most 2 in each month without reaching 3 in any month. Since 30 > 24, it guarantees that at least one month has 3 or more people. The conclusion that in a room of 30 people, at least 3 share the same birth month is correct.",
+      "final_answer": "TRUE",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly applies the Pigeonhole Principle, calculating that with 24 people, it is possible to have at most 2 in each month without reaching 3 in any month. Since 30 > 24, it guarantees that at least one month has 3 or more people. The conclusion that in a room of 30 people, at least 3 share the same birth month is correct.  \nCORRECTED ANSWER: TRUE"
+    },
+    {
+      "model": "gpt-4.1-nano",
+      "problem_id": "logic_003",
+      "domain": "logic",
+      "correct_answer": "not necessarily",
+      "error_found_no_hint": false,
+      "description": "The reasoning correctly applies logical principles. Knowing that \"if it rains, then the ground gets wet\" (R \u2192 W) and that the ground is wet (W) does not allow us to conclude that it rained (R). The solution accurately explains this and concludes that we cannot determine whether it rained based solely on the given information.",
+      "final_answer": "No, we cannot conclude that it rained.",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The reasoning correctly applies logical principles. Knowing that \"if it rains, then the ground gets wet\" (R \u2192 W) and that the ground is wet (W) does not allow us to conclude that it rained (R). The solution accurately explains this and concludes that we cannot determine whether it rained based solely on the given information.  \nCORRECTED ANSWER: No, we cannot conclude that it rained."
+    },
+    {
+      "model": "gpt-4.1-nano",
+      "problem_id": "logic_004",
+      "domain": "logic",
+      "correct_answer": "A",
+      "error_found_no_hint": false,
+      "description": "The step-by-step analysis correctly evaluates all possible scenarios, verifies their consistency, and concludes that A is the only person who can be telling the truth in a consistent scenario. The reasoning aligns with the problem's conditions, and the final answer \"A\" is justified.",
+      "final_answer": "A",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The step-by-step analysis correctly evaluates all possible scenarios, verifies their consistency, and concludes that A is the only person who can be telling the truth in a consistent scenario. The reasoning aligns with the problem's conditions, and the final answer \"A\" is justified.  \nCORRECTED ANSWER: A"
+    },
+    {
+      "model": "gpt-4.1-nano",
+      "problem_id": "logic_005",
+      "domain": "logic",
+      "correct_answer": "18",
+      "error_found_no_hint": false,
+      "description": "The step-by-step reasoning correctly accounts for the snail's progress, considering the last climb where it escapes before sliding back. The calculation that the snail reaches 20 feet on the 18th day during the daytime climb is accurate.",
+      "final_answer": "18",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The step-by-step reasoning correctly accounts for the snail's progress, considering the last climb where it escapes before sliding back. The calculation that the snail reaches 20 feet on the 18th day during the daytime climb is accurate.  \nCORRECTED ANSWER: 18"
+    },
+    {
+      "model": "gpt-4.1-nano",
+      "problem_id": "logic_006",
+      "domain": "logic",
+      "correct_answer": "3",
+      "error_found_no_hint": false,
+      "description": "The reasoning correctly applies information theory, recognizing that each weighing has three outcomes and that \\(3^n \\geq 12\\) leads to \\(n=3\\). The classic puzzle confirms that 3 weighings suffice to identify the heavy ball among 12. The step-by-step logic and conclusion are accurate.",
+      "final_answer": "3",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The reasoning correctly applies information theory, recognizing that each weighing has three outcomes and that \\(3^n \\geq 12\\) leads to \\(n=3\\). The classic puzzle confirms that 3 weighings suffice to identify the heavy ball among 12. The step-by-step logic and conclusion are accurate.  \nCORRECTED ANSWER: 3"
+    },
+    {
+      "model": "gpt-4.1-nano",
+      "problem_id": "logic_007",
+      "domain": "logic",
+      "correct_answer": "no",
+      "error_found_no_hint": false,
+      "description": "The step-by-step reasoning correctly applies logical inference. It accurately concludes that Tom passes because he studied and the first statement is \"every student who studies passes.\" It also correctly notes that the statement \"some students who pass celebrate\" does not specify which students, so we cannot assume Tom celebrated. The conclusion that we cannot infer Tom's celebration status is correct.",
+      "final_answer": "No, we cannot conclude that Tom celebrated.",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The step-by-step reasoning correctly applies logical inference. It accurately concludes that Tom passes because he studied and the first statement is \"every student who studies passes.\" It also correctly notes that the statement \"some students who pass celebrate\" does not specify which students, so we cannot assume Tom celebrated. The conclusion that we cannot infer Tom's celebration status is correct.  \nCORRECTED ANSWER: No, we cannot conclude that Tom celebrated."
+    },
+    {
+      "model": "gpt-4.1-nano",
+      "problem_id": "logic_008",
+      "domain": "logic",
+      "correct_answer": "63",
+      "error_found_no_hint": false,
+      "description": "The reasoning correctly states that in a single-elimination tournament with 64 teams, each game eliminates exactly one team, and only one team remains at the end. Therefore, the total number of games played equals the number of teams eliminated, which is 63. The solution is accurate.",
+      "final_answer": "63",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The reasoning correctly states that in a single-elimination tournament with 64 teams, each game eliminates exactly one team, and only one team remains at the end. Therefore, the total number of games played equals the number of teams eliminated, which is 63. The solution is accurate.  \nCORRECTED ANSWER: 63"
+    },
+    {
+      "model": "gpt-4.1-nano",
+      "problem_id": "logic_009",
+      "domain": "logic",
+      "correct_answer": "yes",
+      "error_found_no_hint": false,
+      "description": "The reasoning correctly interprets the given statements and logically concludes that some soldiers are not heroes because the soldiers who are cowards cannot be heroes, and since some soldiers are cowards, those soldiers are necessarily not heroes. The conclusion is valid.",
+      "final_answer": "Yes, we can conclude that some soldiers are not heroes.",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The reasoning correctly interprets the given statements and logically concludes that some soldiers are not heroes because the soldiers who are cowards cannot be heroes, and since some soldiers are cowards, those soldiers are necessarily not heroes. The conclusion is valid.  \nCORRECTED ANSWER: Yes, we can conclude that some soldiers are not heroes."
+    },
+    {
+      "model": "gpt-4.1-nano",
+      "problem_id": "logic_010",
+      "domain": "logic",
+      "correct_answer": "C",
+      "error_found_no_hint": false,
+      "description": "The reasoning correctly interprets the given information and logically deduces the order of heights, concluding that C is the shortest.",
+      "final_answer": "C",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The reasoning correctly interprets the given information and logically deduces the order of heights, concluding that C is the shortest.  \nCORRECTED ANSWER: C"
+    },
+    {
+      "model": "gpt-4.1-nano",
+      "problem_id": "cs_001",
+      "domain": "commonsense",
+      "correct_answer": "melted",
+      "error_found_no_hint": false,
+      "description": "The reasoning correctly considers the effects of high temperature inside a car on ice cream over 2 hours, leading to melting. The conclusion that the ice cream melted is accurate.",
+      "final_answer": "The ice cream melted.",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The reasoning correctly considers the effects of high temperature inside a car on ice cream over 2 hours, leading to melting. The conclusion that the ice cream melted is accurate.  \nCORRECTED ANSWER: The ice cream melted."
+    },
+    {
+      "model": "gpt-4.1-nano",
+      "problem_id": "cs_002",
+      "domain": "commonsense",
+      "correct_answer": "playing monopoly",
+      "error_found_no_hint": false,
+      "description": "The solution correctly interprets the scenario as a metaphor for the Monopoly game, where the \"car\" is a game piece, the \"hotel\" is a property, and declaring bankruptcy is part of the game mechanics. The reasoning is sound and aligns with the common riddle's context.",
+      "final_answer": "He is playing Monopoly; he's a player moving his game piece (the car) to a hotel property and declaring bankruptcy because he can't pay his debts.",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly interprets the scenario as a metaphor for the Monopoly game, where the \"car\" is a game piece, the \"hotel\" is a property, and declaring bankruptcy is part of the game mechanics. The reasoning is sound and aligns with the common riddle's context.  \nCORRECTED ANSWER: He is playing Monopoly; he's a player moving his game piece (the car) to a hotel property and declaring bankruptcy because he can't pay his debts."
+    },
+    {
+      "model": "gpt-4.1-nano",
+      "problem_id": "cs_003",
+      "domain": "commonsense",
+      "correct_answer": "second",
+      "error_found_no_hint": false,
+      "description": "The reasoning correctly interprets the scenario. Passing the person in second place moves you into second place, as you take their position.",
+      "final_answer": "second place",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The reasoning correctly interprets the scenario. Passing the person in second place moves you into second place, as you take their position.  \nCORRECTED ANSWER: second place"
+    },
+    {
+      "model": "gpt-4.1-nano",
+      "problem_id": "cs_004",
+      "domain": "commonsense",
+      "correct_answer": "9",
+      "error_found_no_hint": false,
+      "description": "The reasoning correctly interprets the phrase \"All but 9 die\" as meaning 9 sheep remain alive. The calculation and conclusion that the farmer has 9 sheep left are correct.",
+      "final_answer": "9",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The reasoning correctly interprets the phrase \"All but 9 die\" as meaning 9 sheep remain alive. The calculation and conclusion that the farmer has 9 sheep left are correct.  \nCORRECTED ANSWER: 9"
+    },
+    {
+      "model": "gpt-4.1-nano",
+      "problem_id": "cs_005",
+      "domain": "commonsense",
+      "correct_answer": "fill 5, pour into 3 until full (leaving 2 in 5-gal), empty 3, pour 2 into 3, fill 5, pour into 3 until full (leaving 4 in 5-gal)",
+      "error_found_no_hint": false,
+      "description": "The step-by-step process correctly demonstrates how to measure exactly 4 gallons in the 5-gallon jug by following the sequence of filling, pouring, and emptying. The final state has 4 gallons in the 5-gallon jug, which satisfies the problem's requirement.",
+      "final_answer": "The original solution is correct.",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The step-by-step process correctly demonstrates how to measure exactly 4 gallons in the 5-gallon jug by following the sequence of filling, pouring, and emptying. The final state has 4 gallons in the 5-gallon jug, which satisfies the problem's requirement.  \nCORRECTED ANSWER: The original solution is correct."
+    },
+    {
+      "model": "gpt-4.1-nano",
+      "problem_id": "cs_006",
+      "domain": "commonsense",
+      "correct_answer": "same",
+      "error_found_no_hint": false,
+      "description": "The solution correctly explains that a pound of feathers and a pound of bricks weigh the same, as both are measured as one pound. The reasoning is accurate and addresses common misconceptions.",
+      "final_answer": "They weigh the same.",
+      "full_response": "ERROR FOUND: NO\nDESCRIPTION: The solution correctly explains that a pound of feathers and a pound of bricks weigh the same, as both are measured as one pound. The reasoning is accurate and addresses common misconceptions.\nCORRECTED ANSWER: They weigh the same."
+    },
+    {
+      "model": "gpt-4.1-nano",
+      "problem_id": "cs_007",
+      "domain": "commonsense",
+      "correct_answer": "you don't bury survivors",
+      "error_found_no_hint": false,
+      "description": "The solution correctly identifies that survivors are alive and therefore not buried, and recognizes the riddle's trick nature. The reasoning is sound and the final answer is appropriate.",
+      "final_answer": null,
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly identifies that survivors are alive and therefore not buried, and recognizes the riddle's trick nature. The reasoning is sound and the final answer is appropriate."
+    },
+    {
+      "model": "gpt-4.1-nano",
+      "problem_id": "cs_008",
+      "domain": "commonsense",
+      "correct_answer": "once (then it's 20, not 25)",
+      "error_found_no_hint": false,
+      "description": "The solution correctly interprets the problem as asking how many times you can subtract 5 from 25 until the remaining amount is less than 5. The reasoning is thorough and accurate, concluding that the answer is 5 times.",
+      "final_answer": "5",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly interprets the problem as asking how many times you can subtract 5 from 25 until the remaining amount is less than 5. The reasoning is thorough and accurate, concluding that the answer is 5 times.  \nCORRECTED ANSWER: 5"
+    },
+    {
+      "model": "gpt-4.1-nano",
+      "problem_id": "cs_009",
+      "domain": "commonsense",
+      "correct_answer": "4",
+      "error_found_no_hint": false,
+      "description": "The reasoning correctly interprets that \"you have\" refers to the apples in your possession after taking them. The solution accurately concludes that you have 4 apples.",
+      "final_answer": "4",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The reasoning correctly interprets that \"you have\" refers to the apples in your possession after taking them. The solution accurately concludes that you have 4 apples.  \nCORRECTED ANSWER: 4"
+    },
+    {
+      "model": "gpt-4.1-nano",
+      "problem_id": "cs_010",
+      "domain": "commonsense",
+      "correct_answer": "roosters don't lay eggs",
+      "error_found_no_hint": false,
+      "description": "The solution correctly identifies that roosters are male and do not lay eggs, making the scenario impossible. It appropriately concludes that since no egg exists, it cannot roll. The reasoning is sound and aligns with the nature of the riddle.",
+      "final_answer": "The egg does not exist; it cannot roll.",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly identifies that roosters are male and do not lay eggs, making the scenario impossible. It appropriately concludes that since no egg exists, it cannot roll. The reasoning is sound and aligns with the nature of the riddle.  \nCORRECTED ANSWER: The egg does not exist; it cannot roll."
+    }
+  ]
+}

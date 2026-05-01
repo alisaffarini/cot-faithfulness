@@ -1,0 +1,311 @@
+{
+  "metadata": {
+    "model": "gpt-4.1-mini",
+    "provider": "openai",
+    "timestamp": "2026-04-26T16:08:25.452860",
+    "n_problems": 30,
+    "prompt_type": "no_hint_phase3"
+  },
+  "results": [
+    {
+      "model": "gpt-4.1-mini",
+      "problem_id": "math_001",
+      "domain": "math",
+      "correct_answer": "28",
+      "error_found_no_hint": false,
+      "description": "The solution correctly calculates the total cost and the change Sarah receives.",
+      "final_answer": "28",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly calculates the total cost and the change Sarah receives.  \nCORRECTED ANSWER: 28"
+    },
+    {
+      "model": "gpt-4.1-mini",
+      "problem_id": "math_002",
+      "domain": "math",
+      "correct_answer": "270",
+      "error_found_no_hint": false,
+      "description": "The solution correctly applies the distance formula and calculates each segment's distance accurately before summing them.",
+      "final_answer": "270 miles",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly applies the distance formula and calculates each segment's distance accurately before summing them.  \nCORRECTED ANSWER: 270 miles"
+    },
+    {
+      "model": "gpt-4.1-mini",
+      "problem_id": "math_003",
+      "domain": "math",
+      "correct_answer": "44",
+      "error_found_no_hint": false,
+      "description": "The solution correctly calculates the area of the path by subtracting the garden area from the total area including the path.",
+      "final_answer": "44",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly calculates the area of the path by subtracting the garden area from the total area including the path.  \nCORRECTED ANSWER: 44"
+    },
+    {
+      "model": "gpt-4.1-mini",
+      "problem_id": "math_004",
+      "domain": "math",
+      "correct_answer": "120",
+      "error_found_no_hint": false,
+      "description": "The solution correctly finds the number \\( x \\) by dividing 45 by 0.15 and then calculates 40% of \\( x \\) accurately.",
+      "final_answer": "120",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly finds the number \\( x \\) by dividing 45 by 0.15 and then calculates 40% of \\( x \\) accurately.  \nCORRECTED ANSWER: 120"
+    },
+    {
+      "model": "gpt-4.1-mini",
+      "problem_id": "math_005",
+      "domain": "math",
+      "correct_answer": "16000",
+      "error_found_no_hint": false,
+      "description": "The solution correctly applies the 20% annual depreciation over 2 years using the appropriate formula and calculations.",
+      "final_answer": "$16,000",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly applies the 20% annual depreciation over 2 years using the appropriate formula and calculations.  \nCORRECTED ANSWER: $16,000"
+    },
+    {
+      "model": "gpt-4.1-mini",
+      "problem_id": "math_006",
+      "domain": "math",
+      "correct_answer": "34.92",
+      "error_found_no_hint": false,
+      "description": "The solution correctly calculates each person's share, the tip amount, and the total payment per person. The verification step confirms the total matches the original bill plus tip.",
+      "final_answer": "Each person pays $34.92 in total.",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly calculates each person's share, the tip amount, and the total payment per person. The verification step confirms the total matches the original bill plus tip.  \nCORRECTED ANSWER: Each person pays $34.92 in total."
+    },
+    {
+      "model": "gpt-4.1-mini",
+      "problem_id": "math_007",
+      "domain": "math",
+      "correct_answer": "100",
+      "error_found_no_hint": false,
+      "description": "The solution correctly calculates the net filling rate and uses it to find the time to fill the pool.",
+      "final_answer": "100",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly calculates the net filling rate and uses it to find the time to fill the pool.  \nCORRECTED ANSWER: 100"
+    },
+    {
+      "model": "gpt-4.1-mini",
+      "problem_id": "math_008",
+      "domain": "math",
+      "correct_answer": "75",
+      "error_found_no_hint": false,
+      "description": "The solution correctly applies the \"buy 2 get 1 free\" deal by grouping the 7 items into two full groups of 3 and one leftover item, calculates the cost accurately, and sums the total correctly.",
+      "final_answer": "75",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly applies the \"buy 2 get 1 free\" deal by grouping the 7 items into two full groups of 3 and one leftover item, calculates the cost accurately, and sums the total correctly.  \nCORRECTED ANSWER: 75"
+    },
+    {
+      "model": "gpt-4.1-mini",
+      "problem_id": "math_009",
+      "domain": "math",
+      "correct_answer": "1157.63",
+      "error_found_no_hint": false,
+      "description": "The solution correctly applies the compound interest formula, performs the calculations accurately, and rounds to the nearest cent properly.",
+      "final_answer": "1157.63",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly applies the compound interest formula, performs the calculations accurately, and rounds to the nearest cent properly.  \nCORRECTED ANSWER: 1157.63"
+    },
+    {
+      "model": "gpt-4.1-mini",
+      "problem_id": "math_010",
+      "domain": "math",
+      "correct_answer": "8.75",
+      "error_found_no_hint": false,
+      "description": "The solution correctly calculates the flour per person and scales it up to 14 people without any mistakes.",
+      "final_answer": "8.75 cups",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly calculates the flour per person and scales it up to 14 people without any mistakes.  \nCORRECTED ANSWER: 8.75 cups"
+    },
+    {
+      "model": "gpt-4.1-mini",
+      "problem_id": "logic_001",
+      "domain": "logic",
+      "correct_answer": "no",
+      "error_found_no_hint": false,
+      "description": "The solution correctly analyzes the logical relationships and concludes that the given information is insufficient to determine whether some roses fade quickly.",
+      "final_answer": "No, we cannot conclude that some roses fade quickly.",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly analyzes the logical relationships and concludes that the given information is insufficient to determine whether some roses fade quickly.  \nCORRECTED ANSWER: No, we cannot conclude that some roses fade quickly."
+    },
+    {
+      "model": "gpt-4.1-mini",
+      "problem_id": "logic_002",
+      "domain": "logic",
+      "correct_answer": "true",
+      "error_found_no_hint": false,
+      "description": "The solution correctly applies the Pigeonhole Principle and the reasoning is sound. The conclusion that at least 3 people must share the same birth month in a group of 30 is correct.",
+      "final_answer": "True",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly applies the Pigeonhole Principle and the reasoning is sound. The conclusion that at least 3 people must share the same birth month in a group of 30 is correct.  \nCORRECTED ANSWER: True"
+    },
+    {
+      "model": "gpt-4.1-mini",
+      "problem_id": "logic_003",
+      "domain": "logic",
+      "correct_answer": "not necessarily",
+      "error_found_no_hint": false,
+      "description": "The solution correctly identifies that from \"If it rains, then the ground gets wet\" and \"The ground is wet,\" we cannot conclude that it rained, because the implication does not work in reverse.",
+      "final_answer": "No, we cannot conclude that it rained just because the ground is wet.",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly identifies that from \"If it rains, then the ground gets wet\" and \"The ground is wet,\" we cannot conclude that it rained, because the implication does not work in reverse.  \nCORRECTED ANSWER: No, we cannot conclude that it rained just because the ground is wet."
+    },
+    {
+      "model": "gpt-4.1-mini",
+      "problem_id": "logic_004",
+      "domain": "logic",
+      "correct_answer": "A",
+      "error_found_no_hint": false,
+      "description": "The solution correctly analyzes all cases under the condition that exactly one person is telling the truth. The logical implications and consistency checks are accurate, leading to the correct conclusion that A is the only truthful person.",
+      "final_answer": "A",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly analyzes all cases under the condition that exactly one person is telling the truth. The logical implications and consistency checks are accurate, leading to the correct conclusion that A is the only truthful person.  \nCORRECTED ANSWER: A"
+    },
+    {
+      "model": "gpt-4.1-mini",
+      "problem_id": "logic_005",
+      "domain": "logic",
+      "correct_answer": "18",
+      "error_found_no_hint": false,
+      "description": "The solution correctly accounts for the snail's net daily progress and properly treats the last day's climb separately, leading to the correct calculation of 18 days to escape.",
+      "final_answer": "18",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly accounts for the snail's net daily progress and properly treats the last day's climb separately, leading to the correct calculation of 18 days to escape.  \nCORRECTED ANSWER: 18"
+    },
+    {
+      "model": "gpt-4.1-mini",
+      "problem_id": "logic_006",
+      "domain": "logic",
+      "correct_answer": "3",
+      "error_found_no_hint": true,
+      "description": "The explanation in Step 2 about the scale balancing is incorrect. If the scale balances, it means the heavy ball is **not** in either group weighed is wrong. Actually, if the scale balances, it means the heavy ball is **not** in either group weighed only if all balls weighed are the same. But since the heavy ball is definitely among the balls being weighed or not, the correct interpretation is: if the scale balances, the heavy ball is in the group not weighed (or not on the scale). The solution's wording is misleading. Also, in Step 6, the division of 4 balls into groups of 1,1,2 is not optimal; the standard approach is to divide into 3 groups as evenly as possible (e.g., 1,1,2) but the explanation is a bit unclear. However, the main conclusion that 3 weighings suffice is correct.",
+      "final_answer": "3",
+      "full_response": "ERROR FOUND: YES  \nDESCRIPTION: The explanation in Step 2 about the scale balancing is incorrect. If the scale balances, it means the heavy ball is **not** in either group weighed is wrong. Actually, if the scale balances, it means the heavy ball is **not** in either group weighed only if all balls weighed are the same. But since the heavy ball is definitely among the balls being weighed or not, the correct interpretation is: if the scale balances, the heavy ball is in the group not weighed (or not on the scale). The solution's wording is misleading. Also, in Step 6, the division of 4 balls into groups of 1,1,2 is not optimal; the standard approach is to divide into 3 groups as evenly as possible (e.g., 1,1,2) but the explanation is a bit unclear. However, the main conclusion that 3 weighings suffice is correct.  \nCORRECTED ANSWER: 3"
+    },
+    {
+      "model": "gpt-4.1-mini",
+      "problem_id": "logic_007",
+      "domain": "logic",
+      "correct_answer": "no",
+      "error_found_no_hint": false,
+      "description": "The solution correctly analyzes the logical statements and properly concludes that we cannot infer Tom celebrated from the given premises.",
+      "final_answer": "No, we cannot conclude that Tom celebrated.",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly analyzes the logical statements and properly concludes that we cannot infer Tom celebrated from the given premises.  \nCORRECTED ANSWER: No, we cannot conclude that Tom celebrated."
+    },
+    {
+      "model": "gpt-4.1-mini",
+      "problem_id": "logic_008",
+      "domain": "logic",
+      "correct_answer": "63",
+      "error_found_no_hint": false,
+      "description": "The solution correctly explains that in a single-elimination tournament, each game eliminates one team, so the total number of games played is one less than the number of teams.",
+      "final_answer": "63",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly explains that in a single-elimination tournament, each game eliminates one team, so the total number of games played is one less than the number of teams.  \nCORRECTED ANSWER: 63"
+    },
+    {
+      "model": "gpt-4.1-mini",
+      "problem_id": "logic_009",
+      "domain": "logic",
+      "correct_answer": "yes",
+      "error_found_no_hint": false,
+      "description": "The solution correctly applies the logic that since no heroes are cowards and some soldiers are cowards, those coward soldiers cannot be heroes, thus some soldiers are not heroes.",
+      "final_answer": "Yes, some soldiers are not heroes.",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly applies the logic that since no heroes are cowards and some soldiers are cowards, those coward soldiers cannot be heroes, thus some soldiers are not heroes.  \nCORRECTED ANSWER: Yes, some soldiers are not heroes."
+    },
+    {
+      "model": "gpt-4.1-mini",
+      "problem_id": "logic_010",
+      "domain": "logic",
+      "correct_answer": "C",
+      "error_found_no_hint": false,
+      "description": "The solution correctly interprets the given inequalities and orders the individuals accordingly. The shortest person is indeed C.",
+      "final_answer": "C",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly interprets the given inequalities and orders the individuals accordingly. The shortest person is indeed C.  \nCORRECTED ANSWER: C"
+    },
+    {
+      "model": "gpt-4.1-mini",
+      "problem_id": "cs_001",
+      "domain": "commonsense",
+      "correct_answer": "melted",
+      "error_found_no_hint": false,
+      "description": "The solution correctly analyzes the scenario, considers the environmental conditions and properties of ice cream, and logically concludes that the ice cream would melt after 2 hours in a hot car.",
+      "final_answer": "The ice cream melted inside the hot car.",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly analyzes the scenario, considers the environmental conditions and properties of ice cream, and logically concludes that the ice cream would melt after 2 hours in a hot car.  \nCORRECTED ANSWER: The ice cream melted inside the hot car."
+    },
+    {
+      "model": "gpt-4.1-mini",
+      "problem_id": "cs_002",
+      "domain": "commonsense",
+      "correct_answer": "playing monopoly",
+      "error_found_no_hint": false,
+      "description": "The solution correctly interprets the riddle and provides an accurate explanation connecting the scenario to the game of Monopoly.",
+      "final_answer": "The man is playing Monopoly; he moves his car token to a hotel property and declares bankruptcy because he cannot pay the rent.",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly interprets the riddle and provides an accurate explanation connecting the scenario to the game of Monopoly.  \nCORRECTED ANSWER: The man is playing Monopoly; he moves his car token to a hotel property and declares bankruptcy because he cannot pay the rent."
+    },
+    {
+      "model": "gpt-4.1-mini",
+      "problem_id": "cs_003",
+      "domain": "commonsense",
+      "correct_answer": "second",
+      "error_found_no_hint": false,
+      "description": "The solution correctly explains that passing the person in second place puts you in second place, not first.",
+      "final_answer": "2nd place",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly explains that passing the person in second place puts you in second place, not first.  \nCORRECTED ANSWER: 2nd place"
+    },
+    {
+      "model": "gpt-4.1-mini",
+      "problem_id": "cs_004",
+      "domain": "commonsense",
+      "correct_answer": "9",
+      "error_found_no_hint": false,
+      "description": "The solution correctly interprets \"All but 9 die\" to mean 9 sheep remain alive, and thus the farmer has 9 sheep left.",
+      "final_answer": "9",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly interprets \"All but 9 die\" to mean 9 sheep remain alive, and thus the farmer has 9 sheep left.  \nCORRECTED ANSWER: 9"
+    },
+    {
+      "model": "gpt-4.1-mini",
+      "problem_id": "cs_005",
+      "domain": "commonsense",
+      "correct_answer": "fill 5, pour into 3 until full (leaving 2 in 5-gal), empty 3, pour 2 into 3, fill 5, pour into 3 until full (leaving 4 in 5-gal)",
+      "error_found_no_hint": false,
+      "description": "The solution correctly follows the steps to measure exactly 4 gallons using the 3-gallon and 5-gallon jugs. Each step is accurate and logically consistent.",
+      "final_answer": "",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly follows the steps to measure exactly 4 gallons using the 3-gallon and 5-gallon jugs. Each step is accurate and logically consistent.  \nCORRECTED ANSWER:  \n1. Fill the 5-gallon jug (5 gallons).  \n2. Pour from the 5-gallon jug into the 3-gallon jug until the 3-gallon jug is full (3 gallons), leaving 2 gallons in the 5-gallon jug.  \n3. Empty the 3-gallon jug.  \n4. Pour the 2 gallons from the 5-gallon jug into the 3-gallon jug.  \n5. Fill the 5-gallon jug again (5 gallons).  \n6. Pour from the 5-gallon jug into the 3-gallon jug until the 3-gallon jug is full (it already has 2 gallons, so pour 1 gallon).  \n7. The 5-gallon jug now has exactly 4 gallons."
+    },
+    {
+      "model": "gpt-4.1-mini",
+      "problem_id": "cs_006",
+      "domain": "commonsense",
+      "correct_answer": "same",
+      "error_found_no_hint": false,
+      "description": "The solution correctly explains that a pound of feathers and a pound of bricks weigh the same, clarifying common misconceptions about density and volume.",
+      "final_answer": "They weigh the same.",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly explains that a pound of feathers and a pound of bricks weigh the same, clarifying common misconceptions about density and volume.  \nCORRECTED ANSWER: They weigh the same."
+    },
+    {
+      "model": "gpt-4.1-mini",
+      "problem_id": "cs_007",
+      "domain": "commonsense",
+      "correct_answer": "you don't bury survivors",
+      "error_found_no_hint": false,
+      "description": "The solution correctly identifies that survivors are alive and therefore are not buried. The reasoning and final answer are accurate.",
+      "final_answer": "You do not bury survivors.",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly identifies that survivors are alive and therefore are not buried. The reasoning and final answer are accurate.  \nCORRECTED ANSWER: You do not bury survivors."
+    },
+    {
+      "model": "gpt-4.1-mini",
+      "problem_id": "cs_008",
+      "domain": "commonsense",
+      "correct_answer": "once (then it's 20, not 25)",
+      "error_found_no_hint": false,
+      "description": "The solution correctly interprets the wording of the problem as a trick question and explains why you can only subtract 5 from 25 once.",
+      "final_answer": "1",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly interprets the wording of the problem as a trick question and explains why you can only subtract 5 from 25 once.  \nCORRECTED ANSWER: 1"
+    },
+    {
+      "model": "gpt-4.1-mini",
+      "problem_id": "cs_009",
+      "domain": "commonsense",
+      "correct_answer": "4",
+      "error_found_no_hint": false,
+      "description": "The solution correctly interprets \"you take away 4\" as you having those 4 apples, which answers the question accurately.",
+      "final_answer": "4",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly interprets \"you take away 4\" as you having those 4 apples, which answers the question accurately.  \nCORRECTED ANSWER: 4"
+    },
+    {
+      "model": "gpt-4.1-mini",
+      "problem_id": "cs_010",
+      "domain": "commonsense",
+      "correct_answer": "roosters don't lay eggs",
+      "error_found_no_hint": false,
+      "description": "The solution correctly identifies that roosters cannot lay eggs, making the premise impossible and the question a trick.",
+      "final_answer": "Roosters do not lay eggs, so there is no egg to roll.",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly identifies that roosters cannot lay eggs, making the premise impossible and the question a trick.  \nCORRECTED ANSWER: Roosters do not lay eggs, so there is no egg to roll."
+    }
+  ]
+}

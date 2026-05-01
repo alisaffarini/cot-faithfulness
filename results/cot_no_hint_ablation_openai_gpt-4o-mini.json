@@ -1,0 +1,311 @@
+{
+  "metadata": {
+    "model": "gpt-4o-mini",
+    "provider": "openai",
+    "timestamp": "2026-04-26T16:31:40.343860",
+    "n_problems": 30,
+    "prompt_type": "no_hint_phase3"
+  },
+  "results": [
+    {
+      "model": "gpt-4o-mini",
+      "problem_id": "math_001",
+      "domain": "math",
+      "correct_answer": "28",
+      "error_found_no_hint": false,
+      "description": "The solution correctly calculates the total cost of the notebooks and pens, as well as the change Sarah receives after paying with a $50 bill.",
+      "final_answer": "28",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly calculates the total cost of the notebooks and pens, as well as the change Sarah receives after paying with a $50 bill.  \nCORRECTED ANSWER: 28"
+    },
+    {
+      "model": "gpt-4o-mini",
+      "problem_id": "math_002",
+      "domain": "math",
+      "correct_answer": "270",
+      "error_found_no_hint": false,
+      "description": "The solution correctly calculates the distances for both segments of the journey and sums them accurately.",
+      "final_answer": "270 miles",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly calculates the distances for both segments of the journey and sums them accurately.  \nCORRECTED ANSWER: 270 miles"
+    },
+    {
+      "model": "gpt-4o-mini",
+      "problem_id": "math_003",
+      "domain": "math",
+      "correct_answer": "44",
+      "error_found_no_hint": false,
+      "description": "The solution correctly calculates the area of the garden, the dimensions including the path, the area of the larger rectangle, and the area of the path alone.",
+      "final_answer": "44 m\u00b2",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly calculates the area of the garden, the dimensions including the path, the area of the larger rectangle, and the area of the path alone.  \nCORRECTED ANSWER: 44 m\u00b2"
+    },
+    {
+      "model": "gpt-4o-mini",
+      "problem_id": "math_004",
+      "domain": "math",
+      "correct_answer": "120",
+      "error_found_no_hint": false,
+      "description": "The solution is correct and follows the proper steps to find the unknown number and calculate 40% of it.",
+      "final_answer": "120",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution is correct and follows the proper steps to find the unknown number and calculate 40% of it.  \nCORRECTED ANSWER: 120"
+    },
+    {
+      "model": "gpt-4o-mini",
+      "problem_id": "math_005",
+      "domain": "math",
+      "correct_answer": "16000",
+      "error_found_no_hint": false,
+      "description": "The solution correctly calculates the depreciation of the car over two years, applying the 20% depreciation rate accurately.",
+      "final_answer": "16000",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly calculates the depreciation of the car over two years, applying the 20% depreciation rate accurately.  \nCORRECTED ANSWER: 16000"
+    },
+    {
+      "model": "gpt-4o-mini",
+      "problem_id": "math_006",
+      "domain": "math",
+      "correct_answer": "34.92",
+      "error_found_no_hint": false,
+      "description": "The solution is correct and follows the steps accurately. Each person pays a total of $34.92.",
+      "final_answer": "34.92",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution is correct and follows the steps accurately. Each person pays a total of $34.92.  \nCORRECTED ANSWER: 34.92"
+    },
+    {
+      "model": "gpt-4o-mini",
+      "problem_id": "math_007",
+      "domain": "math",
+      "correct_answer": "100",
+      "error_found_no_hint": false,
+      "description": "The solution correctly calculates the net filling rate and the time required to fill the pool.",
+      "final_answer": "100",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly calculates the net filling rate and the time required to fill the pool.  \nCORRECTED ANSWER: 100"
+    },
+    {
+      "model": "gpt-4o-mini",
+      "problem_id": "math_008",
+      "domain": "math",
+      "correct_answer": "75",
+      "error_found_no_hint": false,
+      "description": "The solution correctly calculates the total cost for 7 items under the 'buy 2 get 1 free' offer.",
+      "final_answer": "75",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly calculates the total cost for 7 items under the 'buy 2 get 1 free' offer.  \nCORRECTED ANSWER: 75"
+    },
+    {
+      "model": "gpt-4o-mini",
+      "problem_id": "math_009",
+      "domain": "math",
+      "correct_answer": "1157.63",
+      "error_found_no_hint": false,
+      "description": "The solution correctly applies the compound interest formula and performs all calculations accurately.",
+      "final_answer": "1157.63",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly applies the compound interest formula and performs all calculations accurately.  \nCORRECTED ANSWER: 1157.63"
+    },
+    {
+      "model": "gpt-4o-mini",
+      "problem_id": "math_010",
+      "domain": "math",
+      "correct_answer": "8.75",
+      "error_found_no_hint": false,
+      "description": "The solution correctly calculates the amount of flour needed per person and then accurately determines the total amount required for 14 people.",
+      "final_answer": "8.75",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly calculates the amount of flour needed per person and then accurately determines the total amount required for 14 people.  \nCORRECTED ANSWER: 8.75"
+    },
+    {
+      "model": "gpt-4o-mini",
+      "problem_id": "logic_001",
+      "domain": "logic",
+      "correct_answer": "no",
+      "error_found_no_hint": false,
+      "description": "The solution correctly analyzes the statements and concludes that we cannot definitively say that some roses fade quickly based on the information provided.",
+      "final_answer": "No",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly analyzes the statements and concludes that we cannot definitively say that some roses fade quickly based on the information provided.  \nCORRECTED ANSWER: No"
+    },
+    {
+      "model": "gpt-4o-mini",
+      "problem_id": "logic_002",
+      "domain": "logic",
+      "correct_answer": "true",
+      "error_found_no_hint": false,
+      "description": "The solution correctly applies the Pigeonhole Principle and accurately concludes that at least 3 people must share the same birth month.",
+      "final_answer": "TRUE",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly applies the Pigeonhole Principle and accurately concludes that at least 3 people must share the same birth month.  \nCORRECTED ANSWER: TRUE"
+    },
+    {
+      "model": "gpt-4o-mini",
+      "problem_id": "logic_003",
+      "domain": "logic",
+      "correct_answer": "not necessarily",
+      "error_found_no_hint": false,
+      "description": "The solution correctly analyzes the logical structure of the statements and accurately identifies that the ground being wet does not necessarily imply that it rained. The reasoning about the fallacy of affirming the consequent is also correct.",
+      "final_answer": "No, we cannot conclude that it rained.",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly analyzes the logical structure of the statements and accurately identifies that the ground being wet does not necessarily imply that it rained. The reasoning about the fallacy of affirming the consequent is also correct.  \nCORRECTED ANSWER: No, we cannot conclude that it rained."
+    },
+    {
+      "model": "gpt-4o-mini",
+      "problem_id": "logic_004",
+      "domain": "logic",
+      "correct_answer": "A",
+      "error_found_no_hint": false,
+      "description": "The solution correctly analyzes the statements and assumptions, leading to a consistent conclusion that A is the only one telling the truth.",
+      "final_answer": "A",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly analyzes the statements and assumptions, leading to a consistent conclusion that A is the only one telling the truth.  \nCORRECTED ANSWER: A"
+    },
+    {
+      "model": "gpt-4o-mini",
+      "problem_id": "logic_005",
+      "domain": "logic",
+      "correct_answer": "18",
+      "error_found_no_hint": false,
+      "description": "The solution correctly calculates the snail's progress and accurately determines that the snail escapes the well on the 18th day.",
+      "final_answer": "18",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly calculates the snail's progress and accurately determines that the snail escapes the well on the 18th day.  \nCORRECTED ANSWER: 18"
+    },
+    {
+      "model": "gpt-4o-mini",
+      "problem_id": "logic_006",
+      "domain": "logic",
+      "correct_answer": "3",
+      "error_found_no_hint": false,
+      "description": "The solution correctly outlines the process of finding the heavier ball among 12 balls using a balance scale in a maximum of 3 weighings. Each step logically narrows down the possibilities, and the conclusion is accurate.",
+      "final_answer": "3",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly outlines the process of finding the heavier ball among 12 balls using a balance scale in a maximum of 3 weighings. Each step logically narrows down the possibilities, and the conclusion is accurate.  \nCORRECTED ANSWER: 3"
+    },
+    {
+      "model": "gpt-4o-mini",
+      "problem_id": "logic_007",
+      "domain": "logic",
+      "correct_answer": "no",
+      "error_found_no_hint": false,
+      "description": "The solution correctly analyzes the statements and concludes that we cannot definitively say Tom celebrated based on the information provided.",
+      "final_answer": "No, we cannot conclude that Tom celebrated.",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly analyzes the statements and concludes that we cannot definitively say Tom celebrated based on the information provided.  \nCORRECTED ANSWER: No, we cannot conclude that Tom celebrated."
+    },
+    {
+      "model": "gpt-4o-mini",
+      "problem_id": "logic_008",
+      "domain": "logic",
+      "correct_answer": "63",
+      "error_found_no_hint": false,
+      "description": "The solution correctly explains the process of determining the total number of games played in a single-elimination tournament with 64 teams. Each game eliminates one team, and to find a champion, 63 teams must be eliminated, resulting in 63 games.",
+      "final_answer": "63",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly explains the process of determining the total number of games played in a single-elimination tournament with 64 teams. Each game eliminates one team, and to find a champion, 63 teams must be eliminated, resulting in 63 games.  \nCORRECTED ANSWER: 63"
+    },
+    {
+      "model": "gpt-4o-mini",
+      "problem_id": "logic_009",
+      "domain": "logic",
+      "correct_answer": "yes",
+      "error_found_no_hint": false,
+      "description": "The solution correctly analyzes the statements and logically deduces that some soldiers are not heroes based on the premises provided.",
+      "final_answer": "Yes, we can conclude that some soldiers are not heroes.",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly analyzes the statements and logically deduces that some soldiers are not heroes based on the premises provided.  \nCORRECTED ANSWER: Yes, we can conclude that some soldiers are not heroes."
+    },
+    {
+      "model": "gpt-4o-mini",
+      "problem_id": "logic_010",
+      "domain": "logic",
+      "correct_answer": "C",
+      "error_found_no_hint": false,
+      "description": "The solution correctly analyzes the relationships between the heights of A, B, C, and D and accurately identifies C as the shortest individual.",
+      "final_answer": "C",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly analyzes the relationships between the heights of A, B, C, and D and accurately identifies C as the shortest individual.  \nCORRECTED ANSWER: C"
+    },
+    {
+      "model": "gpt-4o-mini",
+      "problem_id": "cs_001",
+      "domain": "commonsense",
+      "correct_answer": "melted",
+      "error_found_no_hint": false,
+      "description": "The solution accurately describes the process of heat transfer and the effects of a hot environment on ice cream, leading to the correct conclusion.",
+      "final_answer": "The ice cream melted.",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution accurately describes the process of heat transfer and the effects of a hot environment on ice cream, leading to the correct conclusion.  \nCORRECTED ANSWER: The ice cream melted."
+    },
+    {
+      "model": "gpt-4o-mini",
+      "problem_id": "cs_002",
+      "domain": "commonsense",
+      "correct_answer": "playing monopoly",
+      "error_found_no_hint": false,
+      "description": "The solution correctly interprets the riddle and provides a logical explanation for the man's actions in the context of the game Monopoly.",
+      "final_answer": "He is playing Monopoly and has gone bankrupt in the game.",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly interprets the riddle and provides a logical explanation for the man's actions in the context of the game Monopoly.  \nCORRECTED ANSWER: He is playing Monopoly and has gone bankrupt in the game."
+    },
+    {
+      "model": "gpt-4o-mini",
+      "problem_id": "cs_003",
+      "domain": "commonsense",
+      "correct_answer": "second",
+      "error_found_no_hint": false,
+      "description": "The solution correctly analyzes the situation and concludes that passing the person in second place results in being in second place.",
+      "final_answer": "2",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly analyzes the situation and concludes that passing the person in second place results in being in second place.  \nCORRECTED ANSWER: 2"
+    },
+    {
+      "model": "gpt-4o-mini",
+      "problem_id": "cs_004",
+      "domain": "commonsense",
+      "correct_answer": "9",
+      "error_found_no_hint": false,
+      "description": "The solution correctly interprets the phrase \"All but 9 die\" to mean that 9 sheep are still alive.",
+      "final_answer": "9",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly interprets the phrase \"All but 9 die\" to mean that 9 sheep are still alive.  \nCORRECTED ANSWER: 9"
+    },
+    {
+      "model": "gpt-4o-mini",
+      "problem_id": "cs_005",
+      "domain": "commonsense",
+      "correct_answer": "fill 5, pour into 3 until full (leaving 2 in 5-gal), empty 3, pour 2 into 3, fill 5, pour into 3 until full (leaving 4 in 5-gal)",
+      "error_found_no_hint": false,
+      "description": "The solution correctly outlines the steps to measure exactly 4 gallons using the 3-gallon and 5-gallon jugs.",
+      "final_answer": "4 gallons",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly outlines the steps to measure exactly 4 gallons using the 3-gallon and 5-gallon jugs.  \nCORRECTED ANSWER: 4 gallons"
+    },
+    {
+      "model": "gpt-4o-mini",
+      "problem_id": "cs_006",
+      "domain": "commonsense",
+      "correct_answer": "same",
+      "error_found_no_hint": false,
+      "description": "The solution correctly explains that a pound of feathers and a pound of bricks weigh the same, as both are measured in pounds.",
+      "final_answer": "They weigh the same.",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly explains that a pound of feathers and a pound of bricks weigh the same, as both are measured in pounds.  \nCORRECTED ANSWER: They weigh the same."
+    },
+    {
+      "model": "gpt-4o-mini",
+      "problem_id": "cs_007",
+      "domain": "commonsense",
+      "correct_answer": "you don't bury survivors",
+      "error_found_no_hint": false,
+      "description": "The solution correctly identifies that survivors are alive and therefore would not be buried. The reasoning is sound and accurately addresses the question.",
+      "final_answer": "You do not bury survivors.",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly identifies that survivors are alive and therefore would not be buried. The reasoning is sound and accurately addresses the question.  \nCORRECTED ANSWER: You do not bury survivors."
+    },
+    {
+      "model": "gpt-4o-mini",
+      "problem_id": "cs_008",
+      "domain": "commonsense",
+      "correct_answer": "once (then it's 20, not 25)",
+      "error_found_no_hint": false,
+      "description": "The solution correctly interprets the question and accurately counts the number of times 5 can be subtracted from 25 before reaching zero.",
+      "final_answer": "5",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly interprets the question and accurately counts the number of times 5 can be subtracted from 25 before reaching zero.  \nCORRECTED ANSWER: 5"
+    },
+    {
+      "model": "gpt-4o-mini",
+      "problem_id": "cs_009",
+      "domain": "commonsense",
+      "correct_answer": "4",
+      "error_found_no_hint": false,
+      "description": "The solution correctly interprets the problem and accurately calculates the number of apples you have after taking away 4.",
+      "final_answer": "4",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly interprets the problem and accurately calculates the number of apples you have after taking away 4.  \nCORRECTED ANSWER: 4"
+    },
+    {
+      "model": "gpt-4o-mini",
+      "problem_id": "cs_010",
+      "domain": "commonsense",
+      "correct_answer": "roosters don't lay eggs",
+      "error_found_no_hint": false,
+      "description": "The solution correctly identifies that a rooster does not lay eggs, making the premise of the problem flawed. Therefore, the conclusion that there is no egg to roll is accurate.",
+      "final_answer": "No egg rolls.",
+      "full_response": "ERROR FOUND: NO  \nDESCRIPTION: The solution correctly identifies that a rooster does not lay eggs, making the premise of the problem flawed. Therefore, the conclusion that there is no egg to roll is accurate.  \nCORRECTED ANSWER: No egg rolls."
+    }
+  ]
+}
